@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Quiet News · Your daily perspective</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to news</a>
+    <header>
+      <div class="brand">
+        <span class="mark">q.</span>
+        <div>
+          <strong>Quiet News</strong><span>A clearer view of the day</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button
+          id="search-toggle"
+          class="header-control"
+          aria-label="Search news"
+          aria-expanded="false"
+          aria-controls="search-panel"
+          title="Search news"
+        >
+          <span aria-hidden="true">⌕</span
+          ><span class="control-label">Search</span>
+        </button>
+        <button
+          id="refresh"
+          class="header-control"
+          aria-label="Check for updates"
+          title="Check for updates"
+        >
+          <span aria-hidden="true">↻</span
+          ><span class="control-label">Refresh</span>
+        </button>
+        <div class="menu-wrap">
+          <button
+            id="menu-toggle"
+            class="header-control"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="header-menu"
+            title="Menu"
+          >
+            <span aria-hidden="true">☰</span
+            ><span class="control-label">Menu</span>
+          </button>
+          <div id="header-menu" class="header-menu" hidden>
+            <button id="settings-open">Preferences</button
+            ><button id="sources-open">Sources</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="search-panel" hidden>
+      <form id="search-form" class="toolbar">
+        <label class="search"
+          ><span>Search</span
+          ><input
+            id="search"
+            type="search"
+            placeholder="Search headlines and summaries"
+            maxlength="200" /></label
+        ><label
+          >View<select id="view">
+            <option value="">Today's briefing</option>
+            <option value="archive">All history</option>
+            <option value="saved">Saved stories</option>
+            <option value="followed">Followed topics</option>
+            <option value="since">Since your last visit</option>
+          </select></label
+        ><label
+          >Publisher<select id="publisher">
+            <option value="">All sources</option>
+          </select></label
+        ><label>Date<input id="filter-date" type="date" /></label
+        ><button type="submit">Find</button
+        ><button type="button" id="clear">Reset</button>
+      </form>
+    </div>
+    <nav aria-label="Sections" id="nav"></nav>
+    <main id="content">
+      <div class="edition">
+        <span id="date"></span
+        ><span id="freshness">Connecting to your newsroom…</span>
+      </div>
+      <div id="notice" role="status" aria-live="polite"></div>
+      <div id="news"><p class="empty">Loading your briefing…</p></div>
+      <footer>
+        Summaries are publisher excerpts. Articles open on the original website.
+        <span id="footer-info"></span><br />Coverage is curated by transparent
+        rules; no source is entirely neutral.
+      </footer>
+    </main>
+    <dialog id="preferences">
+      <div class="dialog-head">
+        <h2>Make it yours</h2>
+        <button class="close" aria-label="Close preferences">✕</button>
+      </div>
+      <form id="settings-form">
+        <label class="check"
+          ><input type="checkbox" name="readerMode" /> Open articles in reader
+          mode</label
+        >
+        <p>
+          Preferences and reading activity are shared across your devices on
+          this server.
+        </p>
+        <div class="form-grid">
+          <label
+            >Appearance<select name="theme">
+              <option value="system">Match device</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select></label
+          ><label
+            >Preferred council / region<input
+              name="region"
+              placeholder="e.g. Bristol" /></label
+          ><label
+            >Followed topics<input
+              name="followed"
+              placeholder="AI, council finance, Taiwan" /></label
+          ><label
+            >Muted words<input name="muted" placeholder="celebrity, football"
+          /></label>
+        </div>
+        <label class="check"
+          ><input type="checkbox" name="compact" /> Compact cards</label
+        ><label class="check"
+          ><input type="checkbox" name="hideRead" /> Hide read stories</label
+        >
+        <h3>Your sections</h3>
+        <p>Uncheck to hide. Use arrows to change the order.</p>
+        <div id="section-settings"></div>
+        <h3>Your publishers</h3>
+        <div id="publisher-settings"></div>
+        <div class="dialog-actions">
+          <button type="submit" class="primary">Save preferences</button
+          ><button type="button" id="export-settings">Export preferences</button
+          ><label class="import"
+            >Import preferences<input
+              type="file"
+              id="import-settings"
+              accept="application/json"
+          /></label>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="sources">
+      <div class="dialog-head">
+        <h2>Your newsroom</h2>
+        <button class="close" aria-label="Close sources">✕</button>
+      </div>
+      <p>
+        Only headlines and short excerpts are stored. Default sources are
+        selected for accessible reporting; access can change. Opinion and
+        premium markers are filtered where feeds identify them. Images are
+        omitted to keep loading light and avoid uncertain reuse rights.
+      </p>
+      <h3>Reader mode exceptions</h3>
+      <p>
+        These publishers open directly on their original websites. Uncheck a
+        source to try reader mode again.
+      </p>
+      <div id="reader-sources"></div>
+      <h3>Feed collection</h3>
+      <div id="feed-list"></div>
+      <h3>Add a vetted feed</h3>
+      <p>
+        Use a publisher's public HTTPS RSS or Atom feed. Check that its articles
+        are freely readable and its terms permit personal feed use. Official
+        council feeds should use an “Official” publisher label.
+      </p>
+      <form id="add-feed" class="form-grid">
+        <label
+          >Publisher<input
+            name="publisher"
+            required
+            maxlength="60"
+            placeholder="Bristol Council (Official)" /></label
+        ><label>Section<select name="section" id="feed-section"></select></label
+        ><label class="wide"
+          >Feed URL<input
+            name="url"
+            type="url"
+            required
+            placeholder="https://…" /></label
+        ><button class="primary">Validate and add</button>
+      </form>
+      <h3>Keep a copy</h3>
+      <p>
+        Download a consistent database backup containing stories, preferences,
+        and reading activity.
+      </p>
+      <a class="button" href="/api/backup" download>Download backup</a>
+    </dialog>
+  </body>
+</html>

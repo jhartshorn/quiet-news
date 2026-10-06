@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reader · Quiet News</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/reader.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="reader-brand">← Quiet News</a
+      ><a
+        id="original"
+        class="button"
+        hidden
+        target="_blank"
+        rel="noopener noreferrer"
+        >Open original ↗</a
+      >
+    </header>
+    <main class="reader-main">
+      <p id="reader-meta" class="eyebrow"></p>
+      <h1 id="reader-title">Preparing your article…</h1>
+      <p id="reader-status" role="status">Fetching a clean reading view.</p>
+      <div id="fallback" hidden>
+        <p>
+          Reader mode couldn't extract a reliable article. You can read it on
+          the publisher’s website.
+        </p>
+        <label class="check"
+          ><input id="always-direct" type="checkbox" />Always open this source
+          directly</label
+        >
+        <p id="preference-note">
+          This preference will apply across your devices. You can change it
+          later in Sources.
+        </p>
+        <button id="fallback-open" class="primary">
+          Open original article ↗</button
+        ><button id="retry" hidden>Try reader again</button>
+      </div>
+      <article id="reader-content"></article>
+    </main>
+  </body>
+</html>
