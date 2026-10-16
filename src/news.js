@@ -7,6 +7,22 @@ export const sections = [
   ["tech", "Technology & AI"],
   ["local", "Local government"],
   ["security", "Conflicts & security"],
+  ["elections", "Elections & Democracy"],
+  ["derby", "Derby & Derbyshire"],
+  ["administration", "Public Administration"],
+  ["selfhosted", "Self-Hosted & Open Source"],
+  ["privacy", "Digital Privacy & Security"],
+  ["economics", "Economics & Public Finance"],
+  ["energy", "Energy & Climate"],
+  ["science", "Science & Discovery"],
+  ["books", "Books & Literature"],
+  ["history", "History & Ideas"],
+  ["music", "Classical & World Music"],
+  ["gaming", "Gaming & Emulation"],
+  ["finance", "Personal Finance & Investing"],
+  ["health", "Health & Longevity"],
+  ["libraries", "Reading & Digital Libraries"],
+  ["home", "Home & Sustainable Living"],
 ];
 export const defaultFeeds = [
   ["bbc-top", "BBC News", "https://feeds.bbci.co.uk/news/rss.xml", "uk", true],
@@ -86,6 +102,156 @@ export const defaultFeeds = [
     "https://www.theregister.com/headlines.atom",
     "tech",
   ],
+  ["localgov", "LocalGov", "https://www.localgov.co.uk/rss", "local"],
+  [
+    "propublica",
+    "ProPublica",
+    "https://www.propublica.org/feeds/propublica/main",
+    "us",
+  ],
+  [
+    "ars-technica",
+    "Ars Technica",
+    "https://feeds.arstechnica.com/arstechnica/index",
+    "tech",
+  ],
+  [
+    "bleepingcomputer",
+    "BleepingComputer",
+    "https://www.bleepingcomputer.com/feed/",
+    "tech",
+  ],
+  [
+    "politico-europe",
+    "POLITICO Europe",
+    "https://www.politico.eu/feed/",
+    "world",
+  ],
+  ["city-am", "City A.M.", "https://www.cityam.com/feed/", "uk"],
+  ["npr", "NPR", "https://feeds.npr.org/1001/rss.xml", "us"],
+  [
+    "al-jazeera",
+    "Al Jazeera",
+    "https://www.aljazeera.com/xml/rss/all.xml",
+    "world",
+  ],
+  [
+    "bbc-derby",
+    "BBC News",
+    "https://feeds.bbci.co.uk/news/england/derbyshire/rss.xml",
+    "derby",
+  ],
+  [
+    "guardian-science",
+    "The Guardian",
+    "https://www.theguardian.com/science/rss",
+    "science",
+  ],
+  [
+    "guardian-books",
+    "The Guardian",
+    "https://www.theguardian.com/books/rss",
+    "books",
+  ],
+  [
+    "guardian-classical",
+    "The Guardian",
+    "https://www.theguardian.com/music/classicalmusicandopera/rss",
+    "music",
+  ],
+  [
+    "guardian-money",
+    "The Guardian",
+    "https://www.theguardian.com/money/rss",
+    "finance",
+  ],
+  [
+    "guardian-environment",
+    "The Guardian",
+    "https://www.theguardian.com/environment/rss",
+    "energy",
+  ],
+  [
+    "guardian-health",
+    "The Guardian",
+    "https://www.theguardian.com/society/health/rss",
+    "health",
+  ],
+  [
+    "ars-gaming",
+    "Ars Technica",
+    "https://feeds.arstechnica.com/arstechnica/gaming",
+    "gaming",
+  ],
+  [
+    "democracy-club",
+    "Democracy Club",
+    "https://democracyclub.org.uk/blog/feed/",
+    "elections",
+  ],
+  [
+    "ucl-constitution-unit",
+    "UCL Constitution Unit",
+    "https://blogs.ucl.ac.uk/constitution-unit/feed/",
+    "elections",
+  ],
+  [
+    "quanta",
+    "Quanta Magazine",
+    "https://www.quantamagazine.org/feed/",
+    "science",
+  ],
+  [
+    "carbon-brief",
+    "Carbon Brief",
+    "https://www.carbonbrief.org/feed/",
+    "energy",
+  ],
+  [
+    "nihr-evidence",
+    "NIHR Evidence",
+    "https://evidence.nihr.ac.uk/feed/",
+    "health",
+  ],
+  ["eff", "EFF", "https://www.eff.org/rss/updates.xml", "privacy"],
+  [
+    "gamingonlinux",
+    "GamingOnLinux",
+    "https://www.gamingonlinux.com/article_rss.php",
+    "gaming",
+  ],
+  [
+    "public-domain-review",
+    "Public Domain Review",
+    "https://publicdomainreview.org/rss.xml",
+    "history",
+  ],
+  [
+    "public-books",
+    "Public Books",
+    "https://www.publicbooks.org/feed/",
+    "books",
+  ],
+  ["literary-hub", "Literary Hub", "https://lithub.com/feed/", "books"],
+  [
+    "energy-saving-trust",
+    "Energy Saving Trust",
+    "https://energysavingtrust.org.uk/feed/",
+    "home",
+  ],
+  [
+    "violin-channel",
+    "The Violin Channel",
+    "https://theviolinchannel.com/feed/",
+    "music",
+  ],
+  [
+    "bank-of-england",
+    "Bank of England",
+    "https://www.bankofengland.co.uk/rss/news",
+    "economics",
+  ],
+  ["monevator", "Monevator", "https://monevator.com/feed/", "finance"],
 ].map(([id, publisher, url, section, top = false]) => ({
   id,
   publisher,
@@ -124,6 +290,103 @@ export function articleURL(value) {
     return null;
   }
 }
+// Match specific subjects rather than broad words such as "model" or "party".
+const specialistTopics = [
+  [
+    "elections",
+    /\b(electoral|election administration|election management|voter registration|voter id|voting rights|voting system|polling stations?|returning officers?|democratic participation|electoral reform|democracy)\b/i,
+  ],
+  [
+    "derby",
+    /\b(derbyshire|derby city|derby council|derby county council|chesterfield|erewash|amber valley|derbyshire dales|high peak|bolsover)\b|\bDerby\b/i,
+  ],
+  [
+    "administration",
+    /\b(civil service|civil servants?|public administration|public procurement|government digital|government data|administrative law|cabinet office|public sector reform|government digital service)\b/i,
+  ],
+  [
+    "selfhosted",
+    /\b(self[- ]host(?:ed|ing)?|homelabs?|linux|freebsd|docker|tailscale|open[- ]source|nas systems?|network attached storage|proxmox|nextcloud)\b/i,
+  ],
+  [
+    "privacy",
+    /\b(cybersecurity|cyberattacks?|ransomware|malware|data breach(?:es)?|data protection|digital privacy|digital rights|surveillance|encryption|vulnerabilit(?:y|ies)|gdpr)\b/i,
+  ],
+  [
+    "economics",
+    /\b(inflation|interest rates?|economic policy|public finance|public spending|productivity|fiscal|taxation|gdp|bank of england|treasury|government budget|national debt)\b/i,
+  ],
+  [
+    "energy",
+    /\b(climate|renewable|renewables|nuclear power|energy policy|energy security|solar power|wind farms?|carbon emissions|global warming|net zero|fossil fuels?)\b/i,
+  ],
+  [
+    "science",
+    /\b(physics|mathematics|astronomy|cosmology|archaeology|archaeologists?|evolutionary biology|scientists?|scientific|quantum|exoplanets?|nasa|space telescope)\b/i,
+  ],
+  [
+    "books",
+    /\b(literary|literature|novelists?|book reviews?|fiction|fantasy novels?|author interviews?|publishing|novels?)\b/i,
+  ],
+  [
+    "history",
+    /\b(historical|historians?|philosophy|philosophers?|political thought|intellectual history|ancient|medieval)\b/i,
+  ],
+  [
+    "music",
+    /\b(classical music|world music|orchestra|orchestral|symphon(?:y|ies)|opera|composers?|chamber music|middle eastern music|oud|maqam)\b/i,
+  ],
+  [
+    "gaming",
+    /\b(gaming|video games?|retro gaming|retrogaming|emulators?|emulation|nintendo|steam deck|handheld consoles?|game preservation|indie games?)\b/i,
+  ],
+  [
+    "finance",
+    /\b(personal finance|index funds?|investing|investments?|pensions?|retirement|tax allowances?|isas?|savings accounts?|mortgages?)\b/i,
+  ],
+  [
+    "health",
+    /\b(medical research|clinical trials?|exercise|cardiovascular|nutrition|healthy ageing|healthy aging|longevity|health research|dementia|cancer research|vaccines?)\b/i,
+  ],
+  [
+    "libraries",
+    /\b(e[- ]readers?|e[- ]books?|calibre|koreader|readest|epub|digital libraries|digital preservation|library management|kindle|kobo)\b/i,
+  ],
+  [
+    "home",
+    /\b(home energy|energy efficiency|heat pumps?|home insulation|home repairs?|domestic heating|household costs|smart home|sustainable living)\b/i,
+  ],
+];
+export function classifySections(article, categories = "") {
+  const tags = new Set(article.sections || []);
+  const text = `${article.title} ${article.summary || ""} ${categories}`;
+  for (const [id, pattern] of specialistTopics)
+    if (pattern.test(text)) tags.add(id);
+  // Publisher paths also identify subjects when a headline contains no keywords.
+  const path = new URL(article.url).pathname;
+  for (const [id, pattern] of [
+    ["science", /\/science\//i],
+    ["books", /\/books\//i],
+    ["gaming", /\/gaming\//i],
+    ["finance", /\/money\//i],
+    ["energy", /\/environment\//i],
+    ["health", /\/health(?:care|andwellbeing)?\//i],
+  ])
+    if (pattern.test(path)) tags.add(id);
+  return [...tags];
+}
+export function excludedArticle(article) {
+  if (/\/(sport|sports|football|bootnotes|bofh)\//i.test(article.url))
+    return true;
+  if (/\/(culture|lifeandstyle)\//i.test(article.url))
+    return (
+      !classifySections({ ...article, sections: [] }).length &&
+      !article.sections?.some((id) =>
+        ["books", "music", "history", "gaming", "health", "home"].includes(id),
+      )
+    );
+  return false;
+}
 const array = (x) => (x === undefined ? [] : Array.isArray(x) ? x : [x]);
 export function parseFeed(xml, feed, now = Date.now()) {
   const parsed = new XMLParser({
@@ -155,9 +418,12 @@ export function parseFeed(xml, feed, now = Date.now()) {
       return [];
     if (
       /\b(opinion|editorial|sponsored)\b/i.test(title) ||
-      /\/(sport|sports|football|culture|lifeandstyle|bootnotes|bofh)\//i.test(
+      excludedArticle({
         url,
-      ) ||
+        title,
+        summary: clean(e.description || e.summary || ""),
+        sections: [feed.section],
+      }) ||
       /\b(sports|obituary|bootnotes|bofh|bork|obituary)\b/i.test(
         categories + " " + title,
       )
@@ -204,7 +470,10 @@ export function parseFeed(xml, feed, now = Date.now()) {
         summary,
         publisher: feed.publisher,
         published,
-        sections: [...tags],
+        sections: classifySections(
+          { url, title, summary, sections: [...tags] },
+          categories,
+        ),
         top: feed.top && index < 8,
         kind: /\banalysis\b/i.test(categories + " " + title)
           ? "Analysis"

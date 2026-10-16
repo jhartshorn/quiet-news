@@ -1,0 +1,560 @@
+{
+  "tested": "2026-10-15T20:25:02.413Z",
+  "extraTested": "2026-10-15T20:26:20.067Z",
+  "method": "Live feeds fetched with the app download implementation and parsed with parseFeed. First three eligible articles seeded into isolated SQLite database; real server endpoints used to save, retrieve saved results, extract reader text and re-open cached reader text. No production data or sources changed. Extraction success does not guarantee complete text.",
+  "results": [
+    {
+      "publisher": "NPR",
+      "feed": "https://feeds.npr.org/1001/rss.xml",
+      "section": "us",
+      "eligible": 10,
+      "samples": [
+        {
+          "url": "https://www.npr.org/2026/10/15/nx-s1-6003857/suspicious-mailings-election-congressional-offices",
+          "title": "Suspicious mailings to election officials, congressional offices under investigation",
+          "summary": "The FBI and U.S. Postal Inspection Service are looking into the mailings, some of which included an unidentified powdery white substance.",
+          "publisher": "NPR",
+          "published": 1792094055000,
+          "sections": [
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3080,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.npr.org/2026/10/15/nx-s1-6001504/section-106-historic-preservation-act-threats-anniversary",
+          "title": "U.S. historic preservation law faces the most serious threat in its 60-year history",
+          "summary": "Congress and a federal agency are threatening to weaken the country's historic preservation law, fueling a backlash that critics say is as fiery as the one that led to the law's creation 60 years ago.",
+          "publisher": "NPR",
+          "published": 1792089485000,
+          "sections": [
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 13189,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.npr.org/2026/10/15/nx-s1-6002922/inside-the-race-between-elon-musk-and-jeff-bezos-for-control-of-outer-space",
+          "title": "Inside the race between Elon Musk and Jeff Bezos for control of outer space",
+          "summary": "The Atlantic writer Josh Tyrangiel says Musk and Bezos each want to colonize the moon, mine its resources and launch thousands more satellites. He says their only real competition is each other.",
+          "publisher": "NPR",
+          "published": 1792082702000,
+          "sections": [
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": "Only a short excerpt could be extracted.",
+          "characters": 0,
+          "cacheWorks": false
+        }
+      ]
+    },
+    {
+      "publisher": "Al Jazeera",
+      "feed": "https://www.aljazeera.com/xml/rss/all.xml",
+      "section": "world",
+      "eligible": 22,
+      "samples": [
+        {
+          "url": "https://www.aljazeera.com/video/inside-story/2026/10/15/will-israeli-voters-punish-benjamin-netanyahu?traffic_source=rss",
+          "title": "Will Israeli voters punish Benjamin Netanyahu?",
+          "summary": "Netanyahu is reported to have received warnings before October 7, 2023, but failed to act on time.",
+          "publisher": "Al Jazeera",
+          "published": 1792093467000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1044,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.aljazeera.com/news/longform/2026/10/15/dying-in-ice-custody-inside-one-familys-story-of-heartbreak?traffic_source=rss",
+          "title": "Dying in ICE custody: Inside one family\u2019s story of heartbreak",
+          "summary": "Ismael Ayala-Uribe was one of 53 people to die in ICE custody during Trump\u2019s first 500 days back in office.",
+          "publisher": "Al Jazeera",
+          "published": 1792090628000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3497,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.aljazeera.com/news/2026/10/15/ethiopian-forces-expand-control-in-tigray-as-militia-claims-eritrean-losses?traffic_source=rss",
+          "title": "Ethiopian forces expand control in Tigray as militia claims Eritrean losses",
+          "summary": "Eritrea denies troop movement inside northern Ethiopia as US calls for de-escalation.",
+          "publisher": "Al Jazeera",
+          "published": 1792089701000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3115,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "Ars Technica",
+      "feed": "https://feeds.arstechnica.com/arstechnica/index",
+      "section": "tech",
+      "eligible": 18,
+      "samples": [
+        {
+          "url": "https://arstechnica.com/science/2026/10/what-did-the-liberty-bell-sound-like-science-is-on-the-case/",
+          "title": "What did the Liberty Bell sound like? Science is on the case.",
+          "summary": "Researchers hunted for clues in modal analysis of 20th-century replica bell at Penn State Behrend.",
+          "publisher": "Ars Technica",
+          "published": 1792091403000,
+          "sections": [
+            "tech"
+          ],
+          "kind": "Analysis",
+          "saved": true,
+          "readerError": null,
+          "characters": 5857,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://arstechnica.com/gadgets/2026/10/black-sea-drone-attacks-enter-nato-countrys-territorial-waters-for-first-time/",
+          "title": "Black Sea drone attacks enter NATO country's territorial waters for first time",
+          "summary": "Suspected Russian drones attack chemical tanker within Romanian waters.",
+          "publisher": "Ars Technica",
+          "published": 1792090091000,
+          "sections": [
+            "tech",
+            "security"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7730,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://arstechnica.com/science/2026/10/microplastics-in-water-arent-inert-and-make-damaging-chemicals-on-their-own/",
+          "title": "Microplastics in water aren\u2019t inert and make damaging chemicals on their own",
+          "summary": "Its effect on people remains an ongoing question.",
+          "publisher": "Ars Technica",
+          "published": 1792089557000,
+          "sections": [
+            "tech"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7791,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "BleepingComputer",
+      "feed": "https://www.bleepingcomputer.com/feed/",
+      "section": "tech",
+      "eligible": 15,
+      "samples": [
+        {
+          "url": "https://www.bleepingcomputer.com/news/security/android-gets-ai-defenses-against-messaging-scams-fake-calls/",
+          "title": "Android gets AI defenses against messaging scams, fake calls",
+          "summary": "Google announced new AI-powered defenses against scam messages and call-forwarding abuse on Android, currently rolling out to eligible devices. [...]",
+          "publisher": "BleepingComputer",
+          "published": 1792093723000,
+          "sections": [
+            "tech"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3036,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-hijack-d-link-ubiquiti-devices-to-resell-your-stolen-bandwidth/",
+          "title": "Hackers hijack D-Link, Ubiquiti devices to resell your stolen bandwidth",
+          "summary": "A proxyjacking campaign has impacted devices in 34 countries, monetizing victims' internet connections through a commercial residential proxy network. [...]",
+          "publisher": "BleepingComputer",
+          "published": 1792088459000,
+          "sections": [
+            "tech"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2662,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.bleepingcomputer.com/news/security/fake-arch-linux-packages-push-malware-with-root-privileges/",
+          "title": "Fake Arch Linux packages push malware with root privileges",
+          "summary": "A threat actor uploaded malicious packages to the Arch User Repository (AUR) that impersonated two popular helper tools, yay and paru. [...]",
+          "publisher": "BleepingComputer",
+          "published": 1792084351000,
+          "sections": [
+            "tech"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3225,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "ProPublica",
+      "feed": "https://www.propublica.org/feeds/propublica/main",
+      "section": "us",
+      "eligible": 16,
+      "samples": [
+        {
+          "url": "https://www.propublica.org/article/greg-abbott-border-security-disaster-proclamation",
+          "title": "Trump Says the Border Is Secure. Texas Gov. Greg Abbott Keeps Declaring an Emergency.",
+          "summary": "The post Trump Says the Border Is Secure. Texas Gov. Greg Abbott Keeps Declaring an Emergency. appeared first on ProPublica .",
+          "publisher": "ProPublica",
+          "published": 1792058400000,
+          "sections": [
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 9505,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.propublica.org/article/missouri-plan-judge-selection-republican-attacks",
+          "title": "Frustrated by Losses in the Courts, Missouri Republicans Want to Change How Top Judges Are Selected",
+          "summary": "The post Frustrated by Losses in the Courts, Missouri Republicans Want to Change How Top Judges Are Selected appeared first on ProPublica .",
+          "publisher": "ProPublica",
+          "published": 1792054800000,
+          "sections": [
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 9527,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.propublica.org/article/domestic-violence-immigrant-victims-ice-detention",
+          "title": "These Women Were Trying to Escape Domestic Abuse. ICE Detained Them Instead.",
+          "summary": "The post These Women Were Trying to Escape Domestic Abuse. ICE Detained Them Instead. appeared first on ProPublica .",
+          "publisher": "ProPublica",
+          "published": 1791978163000,
+          "sections": [
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 28476,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "PoliticsHome",
+      "feed": "https://www.politicshome.com/news/rss",
+      "section": "politics",
+      "eligible": 30,
+      "samples": [
+        {
+          "url": "https://www.politicshome.com/news/article/rundown-podcast-politics-manchester-city-charges",
+          "title": "The Rundown Podcast: The Politics Of The Manchester City Charges",
+          "summary": "After Manchester City was found guilty of major breaches of Premier League financial rules, The Rundown podcast examines the political ramifications of a saga that has unleashed a crisis in the country's biggest sport.",
+          "publisher": "PoliticsHome",
+          "published": 1792077300000,
+          "sections": [
+            "politics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": "Could not identify the article text.",
+          "characters": 0,
+          "cacheWorks": false
+        },
+        {
+          "url": "https://www.politicshome.com/news/article/ed-davey-lib-dems-mps-signal-leadership-challenge-not-over",
+          "title": "Ed Davey Under Pressure To Raise Game As MPs Signal Leadership Tensions Aren\u2019t Over",
+          "summary": "Ed Davey is fighting on as leader of the Liberal Democrats after a rumoured challenge fell flat. However, some of his MPs think a move against him has been delayed, not defeated for good.",
+          "publisher": "PoliticsHome",
+          "published": 1791972900000,
+          "sections": [
+            "politics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": "Could not identify the article text.",
+          "characters": 0,
+          "cacheWorks": false
+        },
+        {
+          "url": "https://www.politicshome.com/news/article/rent-controls-work-uk",
+          "title": "Why Rent Controls Remain Controversial",
+          "summary": "The political discussion around rent controls has become a hot-button topic in England and Wales as record-breaking rents continue to put pressure on households struggling with the rising cost of living.",
+          "publisher": "PoliticsHome",
+          "published": 1791896400000,
+          "sections": [
+            "politics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": "Could not identify the article text.",
+          "characters": 0,
+          "cacheWorks": false
+        }
+      ]
+    },
+    {
+      "publisher": "The Independent",
+      "feed": "https://www.independent.co.uk/news/uk/rss",
+      "section": "uk",
+      "error": "readTagExp returned undefined at position 12840. Context: \"\ufffd\ufffd\u0000\ufffdNR\ufffd\u000fC\ufffd\u0019\ufffd=\ufffdq\ufffdH\ufffd\ufffdF\ufffd\u0007\u0007u\ufffd\ufffd\ufffd\ufffd.\ufffdR\u000f\ufffdx\ufffdR\ufffdy\ufffd\ufffd&k\ufffd\ufffd\ufffd%\ufffd\u0018~\ufffd<\ufffd+\ufffd\ufffd:\ufffdT\ufffd\u01cd\ufffd\ufffdK\ufffd\ufffd%\f=\ufffd\u0015\ufffd\u000e\u0011\ufffd\ufffd\t\ufffd\ufffd,\ufffdh\ufffd22\ufffdy\ufffd\ufffd4R\u0492\u028d^4j\u000bO\ufffd\ufffd\ufffd\""
+    },
+    {
+      "publisher": "The Telegraph",
+      "feed": "https://www.telegraph.co.uk/rss.xml",
+      "section": "uk",
+      "error": "HTTP 402"
+    },
+    {
+      "publisher": "POLITICO Europe",
+      "feed": "https://www.politico.eu/feed/",
+      "section": "world",
+      "eligible": 10,
+      "samples": [
+        {
+          "url": "https://www.politico.eu/article/eu-budget-cyprus-president-euco-summit-politico/",
+          "title": "Shorten EU budget to 3 or 4 years, Cyprus president tells POLITICO",
+          "summary": "\u201cYou don\u2019t know what\u2019s going to be the situation in 2030, 2031,\" Nikos Christodoulides says in interview.",
+          "publisher": "POLITICO Europe",
+          "published": 1792095675000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2344,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.politico.eu/article/petteri-orpo-finland-slams-donald-trump-siding-with-vladimir-putin-against-ukraine/",
+          "title": "\u2018No logic\u2019: Finland slams Trump for siding with Putin against Ukraine",
+          "summary": "Prime Minister Petteri Orpo tells POLITICO the U.S. is going against its allies and warns Europe must find a way to keep Ukraine in the fight, even if it means reopening the debate over raiding Russian assets.",
+          "publisher": "POLITICO Europe",
+          "published": 1792092105000,
+          "sections": [
+            "world",
+            "security"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 5226,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.politico.eu/article/emmanuel-macron-euco-eu-leaders-they-need-budget-end-of-year/",
+          "title": "Macron warns EU leaders they need to agree budget by end of year",
+          "summary": "Starting from January, there will be no political room for concluding an agreement, French president tells summit.",
+          "publisher": "POLITICO Europe",
+          "published": 1792088512000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2465,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "City A.M.",
+      "feed": "https://www.cityam.com/feed/",
+      "section": "uk",
+      "eligible": 24,
+      "samples": [
+        {
+          "url": "https://www.cityam.com/robert-jenrick-hits-out-at-deloitte-and-kpmg-over-job-cuts/",
+          "title": "Robert Jenrick hits out at Deloitte and KPMG over job cuts",
+          "summary": "Reform UK\u2019s Robert Jenrick has criticised Big Four giants Deloitte and KPMG for laying off British staff, alleging they did so while \u201cimporting thousands of migrant workers\u201d. In his latest video post, standing outside Deloitte\u2019s London HQ, the MP said Deloitte \u201claid off 800 UK staff\u201d but that \u201cover the last five\u2026",
+          "publisher": "City A.M.",
+          "published": 1792080061000,
+          "sections": [
+            "uk"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3104,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.cityam.com/fifa-still-refusing-to-share-world-cup-sell-off-papers-says-fa-chair/",
+          "title": "Fifa still refusing to share World Cup sell-off papers, says FA chair",
+          "summary": "Football Association chair Debbie Hewitt says the Fifa Council is still being denied full transparency over Gianni Infantino\u2019s aborted World Cup sell-off plan. Infantino apologised to the Council today as it met for the first time since controversy erupted over Fifa Forward Enterprise (FFE), a new private company\u2026",
+          "publisher": "City A.M.",
+          "published": 1792079848000,
+          "sections": [
+            "uk",
+            "local"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2694,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.cityam.com/lloyds-underwriters-seek-to-halt-45m-legal-cover-for-petrofac-bribery-defendants/",
+          "title": "Lloyd\u2019s underwriters seek to halt \u00a345m legal cover for Petrofac bribery defendants",
+          "summary": "A group of Lloyd\u2019s syndicates have sought to block \u00a345m in defence funding for two former Petrofac executives facing a criminal bribery trial. The group of syndicates provided directors\u2019 and officers\u2019 (D&O) insurance coverage to Petrofac\u2019s former chief operating officer, Marwan Chedid, and former chief operations\u2026",
+          "publisher": "City A.M.",
+          "published": 1792079168000,
+          "sections": [
+            "uk",
+            "security"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3056,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "LocalGov",
+      "feed": "https://www.localgov.co.uk/rss",
+      "section": "local",
+      "eligible": 20,
+      "samples": [
+        {
+          "url": "https://www.localgov.co.uk/Norfolk-pension-fund-claws-back-498m-from-US-corporate-giants/65099",
+          "title": "Norfolk pension fund claws back \u00a3498m from US corporate giants",
+          "summary": "Norfolk County Council\u2019s pension fund has helped win back \u00a3498m for investors after taking on US companies in court.",
+          "publisher": "LocalGov",
+          "published": 1792095975646,
+          "sections": [
+            "local"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1313,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.localgov.co.uk/Rayner-expected-to-send-in-commissioners-to-Bedford-BC/65098",
+          "title": "Rayner expected to send in commissioners to Bedford BC",
+          "summary": "Communities secretary Angela Rayner has indicated that the Government is minded to appoint commissioners to Bedford BC after a Best Value inspection.",
+          "publisher": "LocalGov",
+          "published": 1792095975646,
+          "sections": [
+            "local"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1889,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.localgov.co.uk/Acoustic-cameras-trigger-334-fines-for-noisy-drivers-in-Kensington-and-Chelsea/65097",
+          "title": "Acoustic cameras trigger 334 fines for noisy drivers in Kensington and Chelsea",
+          "summary": "Noisy drivers have been fined 334 times in two months after acoustic cameras caught nuisance driving in Kensington and Chelsea.",
+          "publisher": "LocalGov",
+          "published": 1792095975646,
+          "sections": [
+            "local"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 970,
+          "cacheWorks": true
+        }
+      ]
+    },
+    {
+      "publisher": "Civil Service World",
+      "feed": "https://www.civilserviceworld.com/news/rss",
+      "section": "politics",
+      "error": "HTTP 404"
+    },
+    {
+      "publisher": "Al Jazeera news sample",
+      "feed": "https://www.aljazeera.com/xml/rss/all.xml",
+      "section": "world",
+      "eligible": 22,
+      "samples": [
+        {
+          "url": "https://www.aljazeera.com/news/2026/10/15/ethiopian-forces-expand-control-in-tigray-as-militia-claims-eritrean-losses?traffic_source=rss",
+          "title": "Ethiopian forces expand control in Tigray as militia claims Eritrean losses",
+          "summary": "Eritrea denies troop movement inside northern Ethiopia as US calls for de-escalation.",
+          "publisher": "Al Jazeera news sample",
+          "published": 1792089701000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3115,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.aljazeera.com/news/2026/10/15/ahead-of-us-midterms-voters-are-frustrated-with-trump-want-change-poll?traffic_source=rss",
+          "title": "Ahead of US midterms, voters are frustrated with Trump, want change: Poll",
+          "summary": "Widespread voter disillusionment and pocketbook anxieties set a volatile stage for the GOP weeks before election night.",
+          "publisher": "Al Jazeera news sample",
+          "published": 1792088277000,
+          "sections": [
+            "world",
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2896,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.aljazeera.com/news/2026/10/15/trump-ramps-up-third-country-us-deportations-despite-global-rights-outcry?traffic_source=rss",
+          "title": "Trump ramps up third-country US deportations despite global rights outcry",
+          "summary": "Official data shows tens of thousands of migrants and asylum seekers have been sent to countries they have no ties to.",
+          "publisher": "Al Jazeera news sample",
+          "published": 1792086866000,
+          "sections": [
+            "world"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4635,
+          "cacheWorks": true
+        }
+      ]
+    }
+  ]
+}

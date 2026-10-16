@@ -7,6 +7,8 @@ import {
   groupArticles,
   balanced,
   articleURL,
+  classifySections,
+  sections,
 } from "../src/news.js";
 const feed = { publisher: "Example", section: "world", top: true };
 test("RSS parsing filters premium and opinion, sanitises excerpts and classifies conflicts", () => {
@@ -68,4 +70,60 @@ test("Escaped HTML excerpts are stripped after entity decoding", () => {
     articleURL("https://example.com/?a=1&amp;b=2"),
     "https://example.com/?a=1&b=2",
   );
+});
+
+test("Specialist sections follow existing sections and classify focused topics", () => {
+  assert.deepEqual(
+    sections.slice(0, 7).map(([id]) => id),
+    ["uk", "world", "politics", "us", "tech", "local", "security"],
+  );
+  const examples = {
+    elections: "Electoral Commission publishes voter registration guidance",
+    derby: "Derbyshire announces new transport funding",
+    administration: "Cabinet Office updates public procurement guidance",
+    selfhosted: "Docker release improves self-hosted applications",
+    privacy: "Encryption protects users after data breach",
+    economics: "Bank of England reviews inflation and interest rates",
+    energy: "Renewable energy policy supports nuclear power",
+    science: "Astronomy breakthrough reveals new exoplanets",
+    books: "Literary criticism explores a new fantasy novel",
+    history: "Historians uncover medieval manuscripts",
+    music: "Orchestra premieres new chamber music",
+    gaming: "Nintendo emulator supports game preservation",
+    finance: "Index funds and tax allowances for retirement",
+    health: "Clinical trials investigate cardiovascular health",
+    libraries: "KOReader improves EPUB support on Kobo",
+    home: "Heat pumps and home insulation cut household costs",
+  };
+  for (const [id, title] of Object.entries(examples)) {
+    assert.ok(
+      classifySections({
+        title,
+        url: "https://example.com/story",
+        sections: ["world"],
+      }).includes(id),
+      id,
+    );
+  }
+  assert.deepEqual(
+    classifySections({
+      title: "Party leader announces a new model for government",
+      url: "https://example.com/story",
+      sections: ["politics"],
+    }),
+    ["politics"],
+  );
+});
+test("Relevant culture and lifestyle articles are admitted while sport and opinion remain excluded", () => {
+  const xml = `<rss><channel>
+   <item><title>Orchestra performs new symphony</title><link>https://example.com/culture/concert</link></item>
+   <item><title>Heat pumps reduce household costs</title><link>https://example.com/lifeandstyle/home</link></item>
+   <item><title>Celebrity party photographs</title><link>https://example.com/culture/celebrity</link></item>
+   <item><title>Derby football match</title><link>https://example.com/sport/football</link></item>
+   <item><title>Classical music debate</title><link>https://example.com/culture/opinion</link><category>Opinion</category></item>
+   </channel></rss>`;
+  const articles = parseFeed(xml, feed);
+  assert.equal(articles.length, 2);
+  assert.ok(articles[0].sections.includes("music"));
+  assert.ok(articles[1].sections.includes("home"));
 });

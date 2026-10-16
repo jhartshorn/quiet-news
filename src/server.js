@@ -16,6 +16,8 @@ import {
   balanced,
   clean,
   articleURL,
+  classifySections,
+  excludedArticle,
 } from "./news.js";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../public");
 const data = resolve(process.env.DATA_DIR || "data");
@@ -111,7 +113,7 @@ const saveFeed = (f) =>
   db
     .prepare("INSERT OR REPLACE INTO feeds VALUES (?,?)")
     .run(f.id, JSON.stringify(f));
-const parserVersion = "2";
+const parserVersion = "3";
 if (
   db.prepare("SELECT value FROM meta WHERE key='parserVersion'").get()
     ?.value !== parserVersion
@@ -394,7 +396,7 @@ function rows() {
       ...a,
       summary: clean(a.summary),
       url: a.url.replaceAll("&amp;", "&"),
-      sections: JSON.parse(a.sections),
+      sections: classifySections({ ...a, sections: JSON.parse(a.sections) }),
       top: !!a.top,
       saved: !!a.saved,
       read: !!a.read,
@@ -421,9 +423,7 @@ function snapshot(params) {
   const all = rows().filter((a) => {
     const t = `${a.title} ${a.summary}`.toLowerCase();
     return (
-      !/\/(sport|sports|football|culture|lifeandstyle|bootnotes|bofh)\//i.test(
-        a.url,
-      ) &&
+      !excludedArticle(a) &&
       !(/\b(obituary|bork)\b/i.test(a.title) && view !== "saved") &&
       (!q || t.includes(q)) &&
       (!source || a.publisher === source) &&
@@ -441,9 +441,30 @@ function snapshot(params) {
   const archive = !!(q || view || source || day || since || topic);
   const recent = grouped.filter((a) => a.published > Date.now() - 48 * 3600000);
   const pool = archive ? grouped : recent;
+  const top = balanced(
+    pool
+      .filter(
+        (a) =>
+          a.top || a.sections.includes("uk") || a.sections.includes("world"),
+      )
+      .sort(
+        (a, b) => Number(b.top) - Number(a.top) || b.published - a.published,
+      ),
+    6,
+  );
+  const seen = new Set(top.map((a) => a.id));
   const output = {};
-  for (const [id] of sections) {
-    let list = pool.filter((a) => a.sections.includes(id));
+  const ordered = [
+    ...new Set([...settings.order, ...sections.map(([id]) => id)]),
+  ];
+  for (const id of ordered) {
+    if (!archive && settings.hidden.includes(id)) {
+      output[id] = [];
+      continue;
+    }
+    let list = pool.filter(
+      (a) => a.sections.includes(id) && (archive || !seen.has(a.id)),
+    );
     if (id === "local" && settings.region) {
       const preferred = list.filter((a) =>
         (a.title + " " + a.summary)
@@ -455,20 +476,11 @@ function snapshot(params) {
     output[id] = archive
       ? list.slice(0, 100)
       : balanced(list, id === "us" ? 3 : 6);
+    for (const a of output[id]) seen.add(a.id);
   }
   return {
     sections: output,
-    top: balanced(
-      pool
-        .filter(
-          (a) =>
-            a.top || a.sections.includes("uk") || a.sections.includes("world"),
-        )
-        .sort(
-          (a, b) => Number(b.top) - Number(a.top) || b.published - a.published,
-        ),
-      6,
-    ),
+    top,
     results: archive ? grouped.slice(0, 100) : [],
     count: grouped.length,
     settings,
@@ -623,7 +635,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === "POST" && u.pathname === "/api/feeds") {
       const b = await body(req);
-      if (feeds().length >= 40) throw Error("Maximum 40 feeds");
+      if (feeds().length >= 64) throw Error("Maximum 64 feeds");
       if (!b.publisher?.trim() || !sections.some((s) => s[0] === b.section))
         throw Error("Publisher and section are required");
       if (feeds().some((f) => f.url === b.url))
@@ -685,8 +697,8 @@ const server = http.createServer(async (req, res) => {
     json(res, 400, { error: e.message });
   }
 });
-server.listen(Number(process.env.PORT) || 8080, "0.0.0.0", () => {
-  console.log("Quiet News listening on port " + (process.env.PORT || 8080));
+server.listen(Number(process.env.PORT) || 2468, "0.0.0.0", () => {
+  console.log("Quiet News listening on port " + (process.env.PORT || 2468));
   if (process.env.DISABLE_COLLECTOR !== "1") void refresh();
 });
 const timer = setInterval(() => {

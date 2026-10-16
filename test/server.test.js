@@ -54,6 +54,7 @@ test("API persists preferences and validates mutation, backup and private feeds"
     assert.equal(news.top[0].saved, true);
     assert.equal(news.top[0].read, true);
     assert.notEqual(news.top[0].id, "legacy");
+    assert.deepEqual(news.sections.uk, []);
     assert.ok(news.feeds.length > 10);
     const seed = new DatabaseSync(join(dir, "news.sqlite"));
     seed
@@ -62,24 +63,22 @@ test("API persists preferences and validates mutation, backup and private feeds"
         "fixture",
         "https://example.com/council",
         "Council approves new housing policy",
-        "Local council planning news",
+        "Local council planning news and electoral registration guidance",
         "Test Publisher",
         Date.now(),
-        JSON.stringify(["local"]),
+        JSON.stringify(["local", "tech"]),
         0,
         "News",
       );
-    seed
-      .prepare("INSERT INTO reader_cache VALUES (?,?,?)")
-      .run(
-        "fixture",
-        JSON.stringify({
-          title: "Council approves new housing policy",
-          blocks: [{ type: "p", text: "Cached article text" }],
-          minutes: 1,
-        }),
-        Date.now(),
-      );
+    seed.prepare("INSERT INTO reader_cache VALUES (?,?,?)").run(
+      "fixture",
+      JSON.stringify({
+        title: "Council approves new housing policy",
+        blocks: [{ type: "p", text: "Cached article text" }],
+        minutes: 1,
+      }),
+      Date.now(),
+    );
     seed.close();
     const reader = await fetch(base + "/api/reader/fixture").then((r) =>
       r.json(),
@@ -93,6 +92,59 @@ test("API persists preferences and validates mutation, backup and private feeds"
     });
     assert.equal(rejected.status, 403);
     const headers = { "Content-Type": "application/json", "X-Quiet-News": "1" };
+    const snapshot = () => fetch(base + "/api/news").then((r) => r.json());
+    const initial = await snapshot();
+    assert.ok(initial.sections.tech.some((a) => a.id === "fixture"));
+    assert.deepEqual(initial.sections.local, []);
+    assert.ok(initial.sectionNames.some(([id]) => id === "elections"));
+    assert.ok(initial.results.length === 0);
+    const housing = await fetch(base + "/api/news?q=housing").then((r) =>
+      r.json(),
+    );
+    assert.ok(housing.results[0].sections.includes("local"));
+    assert.ok(housing.results[0].sections.includes("elections"));
+    assert.deepEqual(
+      initial.sectionNames.slice(7).map(([id]) => id),
+      [
+        "elections",
+        "derby",
+        "administration",
+        "selfhosted",
+        "privacy",
+        "economics",
+        "energy",
+        "science",
+        "books",
+        "history",
+        "music",
+        "gaming",
+        "finance",
+        "health",
+        "libraries",
+        "home",
+      ],
+    );
+    await fetch(base + "/api/settings", {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ order: ["local", "tech"] }),
+    });
+    const reordered = await snapshot();
+    assert.ok(reordered.sections.local.some((a) => a.id === "fixture"));
+    assert.deepEqual(reordered.sections.tech, []);
+    const displayed = [
+      reordered.top,
+      ...Object.values(reordered.sections),
+    ].flat();
+    assert.equal(new Set(displayed.map((a) => a.id)).size, displayed.length);
+    await fetch(base + "/api/settings", {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ hidden: ["local"] }),
+    });
+    const hidden = await snapshot();
+    assert.ok(hidden.sections.tech.some((a) => a.id === "fixture"));
+    assert.deepEqual(hidden.sections.local, []);
     await fetch(base + "/api/settings", {
       method: "PUT",
       headers,

@@ -11,7 +11,7 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
-Open **http://localhost:8080**. The first collection can take a few minutes; the page updates automatically. Sources shows individual feed errors. Check container status and logs:
+Open **http://localhost:2468**. The first collection can take a few minutes; the page updates automatically. Sources shows individual feed errors. Check container status and logs:
 
 ```sh
 docker compose ps
@@ -22,14 +22,30 @@ Stop with `docker compose down`. Your database stays in the named volume. **Do n
 
 ## Deploy on your Raspberry Pi
 
+With Docker Engine, a recent Docker Compose plugin (supporting `--wait`), and `rsync` installed on the Pi, run this from your Mac:
+
+```sh
+./scripts/deploy
+```
+
+The script connects to `pi@raspberrypi`, copies the project to `~/quiet-news`, builds the image on the Pi, and waits up to 180 seconds for the container to become healthy. It preserves an existing Pi `.env` and the database volume, and excludes local dependencies, data, credentials, and reports from the transfer. On a first deployment it creates `.env` with LAN access and port 2468. Existing `.env` port settings are preserved; the script prints the actual port mapping. Docker must be usable by the SSH user without an interactive sudo prompt.
+
+To use another SSH destination:
+
+```sh
+./scripts/deploy pi@another-host
+```
+
+Manual setup and deployment:
+
 Use **64-bit Raspberry Pi OS**, preferably on a Pi 4 or Pi 5 with at least 2 GB RAM. The Docker base supports ARM64 and Mac architectures. A 32-bit Pi installation is not supported by this setup. Use an SSD if available, particularly for long-term database storage.
 
 1. Install Docker Engine and its Compose plugin using Docker's Debian instructions: https://docs.docker.com/engine/install/debian/ (use the Debian version underlying your Pi OS). Ensure `docker compose version` works. Use `sudo docker …` if your user does not have Docker permission.
 2. Copy this project folder to the Pi, excluding `node_modules`, `data`, `.git`, and your Mac `.env`. For example, from your Mac:
 
    ```sh
-   rsync -av --exclude node_modules --exclude data --exclude .git --exclude .env ./ pi@raspberrypi.local:~/quiet-news/
-   ssh pi@raspberrypi.local
+   rsync -av --exclude node_modules --exclude data --exclude .git --exclude .env ./ pi@raspberrypi:~/quiet-news/
+   ssh pi@raspberrypi
    cd ~/quiet-news
    cp .env.example .env
    nano .env
@@ -43,7 +59,7 @@ Use **64-bit Raspberry Pi OS**, preferably on a Pi 4 or Pi 5 with at least 2 GB 
    docker compose ps
    ```
 
-5. Open **http://raspberrypi.local:8080** from your Mac or phone. If that name does not resolve, use the Pi's local IP address. The container restarts after a reboot if the Docker service is enabled.
+5. Open **http://raspberrypi:2468** from your Mac or phone. If that name does not resolve, use the Pi's local IP address. The container restarts after a reboot if the Docker service is enabled.
 
 Build separately on each machine; do not copy a Mac-built image onto a different architecture. The same source and Compose file work on both.
 
@@ -53,6 +69,8 @@ For remote access, use your existing VPN or an HTTPS reverse proxy with authenti
 
 - Top stories, UK, world, UK politics, U.S. essentials (three stories), technology/AI, local government, and conflicts/security.
 - Every headline opens the original article in a new tab. Short summaries are publisher excerpts, never invented summaries.
+- Specialist sections follow the original sections: Elections & Democracy, Derby & Derbyshire, Public Administration, Self-Hosted & Open Source, Digital Privacy & Security, Economics & Public Finance, Energy & Climate, Science & Discovery, Books & Literature, History & Ideas, Classical & World Music, Gaming & Emulation, Personal Finance & Investing, Health & Longevity, Reading & Digital Libraries, and Home & Sustainable Living.
+- Stories appear only in the first visible section that selects them, starting with Top stories. Preferences can reorder or hide sections. Specialist matching uses headline, excerpt, feed categories and publisher paths; niche sections may be sparse until suitable feeds are added in Sources. Cached headlines are also classified on upgrade.
 - Preferences controls appearance, compact cards, read-story visibility, section order, publishers, muted words, followed topics, and a preferred region.
 - Settings, saved stories, and read status are shared across devices. “Since your last visit” uses the previous visit timestamp stored in each browser.
 - Search covers stored headlines and summaries; use All history, source, and date filters. Search returns up to 100 grouped results.
@@ -61,7 +79,9 @@ For remote access, use your existing VPN or an HTTPS reverse proxy with authenti
 
 ## Source policy and limitations
 
-Defaults include BBC, Sky, Guardian reporting, DW, France 24, and The Register. Feed endpoint availability varies and is visible in Sources. No publisher is entirely neutral. Broadcaster and international diversity complements Guardian coverage; this is not a guaranteed left/right balance and does not include a vetted centre-right newspaper yet.
+Dedicated BBC Derbyshire, Guardian science/books/classical music/money/environment/health, and Ars gaming feeds support the specialist sections. Additional specialist defaults include Democracy Club, UCL Constitution Unit, Quanta Magazine, Carbon Brief, NIHR Evidence, EFF, GamingOnLinux, Public Domain Review, Public Books, Literary Hub, Energy Saving Trust, The Violin Channel, Bank of England, and Monevator. EFF provides a digital-rights advocacy perspective; Monevator publishes investing commentary with commercial links. Reader mode preserves available page text, including podcast notes or livestream descriptions, rather than embedded media or linked documents.
+
+Defaults include BBC, Sky, Guardian reporting, DW, France 24, The Register, LocalGov, ProPublica, Ars Technica, BleepingComputer, POLITICO Europe, City A.M., NPR, and Al Jazeera. Feed endpoint availability varies and is visible in Sources. No publisher is entirely neutral. Broadcaster and international diversity complements Guardian coverage; this is not a guaranteed left/right balance and does not include a vetted centre-right newspaper yet.
 
 Opinion, sponsored, and premium markers are excluded where supplied. Publishers can change access rules, and a freely available RSS excerpt does not guarantee the linked article is free. There is no paywall bypass or full-page scraping. Disable a publisher if its links become restricted. Custom feeds should be checked for free article access and personal-use terms before adding.
 
@@ -76,7 +96,7 @@ Classification uses transparent keyword rules in `src/news.js`. U.S. essentials 
 
 ## Resource use
 
-One process, built-in SQLite, no browser automation, AI, image downloads, or Redis/PostgreSQL. Feeds are fetched sequentially with conditional requests, 12-second socket timeouts, a 2 MB response limit, and at most 60 entries per feed. At most 40 feeds can be configured. Queries scan at most the newest 3,000 retained articles; the default landing page uses the last 48 hours. Database writes are batched per feed. Docker limits the container to 256 MB RAM and 0.75 CPU; these are limits, not measured usage guarantees. Logs rotate at 5 MB × 2.
+One process, built-in SQLite, no browser automation, AI, image downloads, or Redis/PostgreSQL. Feeds are fetched sequentially with conditional requests, 12-second socket timeouts, a 2 MB response limit, and at most 60 entries per feed. At most 64 feeds can be configured. Queries scan at most the newest 3,000 retained articles; the default landing page uses the last 48 hours. Database writes are batched per feed. Docker limits the container to 256 MB RAM and 0.75 CPU; these are limits, not measured usage guarantees. Logs rotate at 5 MB × 2.
 
 Use `docker stats --no-stream` to inspect your actual workload. Increase memory in `compose.yaml` only if your feed workload needs it. There is no refresh overlap. Network/DNS outages preserve cached stories.
 
@@ -94,7 +114,7 @@ docker compose up -d
 
 Restore only your own trusted backup. This replaces the current database. Download a backup first if you want to retain the current state.
 
-To upgrade, back up, copy updated project files, then run `docker compose up -d --build`. The persistent volume stays intact.
+To upgrade, download a backup, then run `./scripts/deploy` from your Mac. The script copies updated project files and rebuilds the container; the persistent volume stays intact.
 
 ## Development without Docker
 
@@ -106,7 +126,7 @@ npm test
 npm start
 ```
 
-Open http://localhost:8080. The database is in `data/`; change with `DATA_DIR`. `PORT`, `UPDATE_MINUTES`, `RETENTION_DAYS`, `AUTH_USER`, and `AUTH_PASSWORD` are supported environment variables. `DISABLE_COLLECTOR=1` disables external fetching for offline development.
+Open http://localhost:2468. The database is in `data/`; change with `DATA_DIR`. `PORT`, `UPDATE_MINUTES`, `RETENTION_DAYS`, `AUTH_USER`, and `AUTH_PASSWORD` are supported environment variables. `DISABLE_COLLECTOR=1` disables external fetching for offline development.
 
 The server blocks custom feeds resolving to private network addresses, enforces same-origin mutation requests, and serves no third-party scripts. Do not treat that as a substitute for keeping Docker/Node updated and restricting network exposure.
 

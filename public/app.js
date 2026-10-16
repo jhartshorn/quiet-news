@@ -63,15 +63,30 @@ async function load() {
     busy = false;
   }
 }
-function card(a) {
+function dashboardURL(sectionId) {
+  const params = new URLSearchParams();
+  for (const [key, selector] of [
+    ["q", "#search"],
+    ["source", "#publisher"],
+    ["date", "#filter-date"],
+    ["view", "#view"],
+  ])
+    if ($(selector).value) params.set(key, $(selector).value);
+  if ($("#view").value === "since") params.set("since", lastVisit);
+  const query = params.toString();
+  return `/${query ? "?" + query : ""}#${sectionId}`;
+}
+function card(a, sectionId) {
   const reader =
     data.settings.readerMode &&
     !data.settings.directSources.includes(a.publisher);
-  const destination = reader ? `/reader?id=${a.id}` : a.url;
+  const destination = reader
+    ? `/reader?id=${a.id}&return=${encodeURIComponent(dashboardURL(sectionId))}`
+    : a.url;
   return `<article class="card ${a.read ? "read" : ""}"><div class="meta"><span class="source">${esc(a.publisher)}</span><span>${a.kind === "Analysis" ? "Analysis · " : ""}<time datetime="${new Date(a.published).toISOString()}" title="${esc(new Date(a.published).toLocaleString())}">${relative(a.published)}</time></span></div><h3><a class="article-link" data-open="${a.id}" href="${esc(destination)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a></h3>${a.summary ? `<p class="summary">${esc(a.summary)}</p>` : ""}<div class="card-bottom"><a class="open" data-open="${a.id}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">Read at source ↗</a><div><button data-state="saved" data-id="${a.id}" data-value="${!a.saved}" aria-pressed="${a.saved}">${a.saved ? "Saved ✓" : "Save"}</button> <button data-state="read" data-id="${a.id}" data-value="${!a.read}" aria-pressed="${a.read}">${a.read ? "Unread" : "Mark read"}</button></div></div>${a.coverage.length ? `<details><summary>Other coverage · ${a.coverage.length}</summary>${a.coverage.map((c) => `<a target="_blank" rel="noopener noreferrer" href="${esc(c.url)}">${esc(c.publisher)} — ${esc(c.title)} ↗</a>`).join("")}</details>` : ""}</article>`;
 }
 function section(id, title, articles, top = false) {
-  return `<section id="${id}"><div class="section-head"><h2>${esc(title)}</h2><span>${top ? "THE BIG PICTURE" : id === "us" ? "MAJOR DEVELOPMENTS ONLY" : "LATEST REPORTING"}</span></div>${id === "security" ? '<div class="topic-tabs"><button data-topic="iran">Iran & Middle East</button><button data-topic="ukraine">Ukraine & Russia</button><button data-topic="taiwan">China & Taiwan</button></div>' : ""}${articles.length ? `<div class="grid ${top ? "top-grid" : ""}">${articles.map(card).join("")}</div>` : `<div class="empty">No recent matching stories${id === "local" ? ". Add a regional or council feed in Sources for more local coverage" : ". Check back after the next update, or explore All history"}.</div>`}</section>`;
+  return `<section id="${id}"><div class="section-head"><h2>${esc(title)}</h2><span>${top ? "THE BIG PICTURE" : id === "us" ? "MAJOR DEVELOPMENTS ONLY" : "LATEST REPORTING"}</span></div>${id === "security" ? '<div class="topic-tabs"><button data-topic="iran">Iran & Middle East</button><button data-topic="ukraine">Ukraine & Russia</button><button data-topic="taiwan">China & Taiwan</button></div>' : ""}${articles.length ? `<div class="grid ${top ? "top-grid" : ""}">${articles.map((a) => card(a, id)).join("")}</div>` : `<div class="empty">No recent matching stories${id === "local" ? ". Add a regional or council feed in Sources for more local coverage" : ". Check back after the next update, or explore All history"}.</div>`}</section>`;
 }
 function render() {
   const s = data.settings;
@@ -385,7 +400,32 @@ $("#add-feed").onsubmit = async (e) => {
     b.textContent = "Validate and add";
   }
 };
+// Restore the dashboard view when returning from the reader.
+const initialParams = new URLSearchParams(location.search);
+for (const [key, selector] of [
+  ["q", "#search"],
+  ["source", "#publisher"],
+  ["date", "#filter-date"],
+  ["view", "#view"],
+]) {
+  const value = initialParams.get(key);
+  if (value === null) continue;
+  if (key === "source" && value) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    $(selector).append(option);
+  }
+  $(selector).value = value;
+}
+if ($("#view").value === "since" && Number(initialParams.get("since")) > 0)
+  lastVisit = Number(initialParams.get("since"));
+if (["q", "source", "date", "view"].some((key) => initialParams.get(key)))
+  toggleSearch(true);
 await load();
+// Sections are inserted asynchronously, after the browser's initial anchor scroll.
+if (location.hash)
+  document.getElementById(location.hash.slice(1))?.scrollIntoView();
 setInterval(() => {
   if (!document.hidden && !document.querySelector("dialog[open]")) load();
 }, 60000);

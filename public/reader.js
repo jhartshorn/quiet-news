@@ -1,5 +1,15 @@
 const $ = (s) => document.querySelector(s);
-const id = new URLSearchParams(location.search).get("id");
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+// Only return to this app's dashboard, even for manually edited reader URLs.
+let home = "/";
+try {
+  const destination = new URL(params.get("return") || "/", location.origin);
+  if (destination.origin === location.origin && destination.pathname === "/")
+    home = destination.pathname + destination.search + destination.hash;
+} catch {}
+$("#reader-home").href = home;
+$(".reader-brand").href = home;
 let article;
 async function api(url, method = "GET", body) {
   const response = await fetch(url, {

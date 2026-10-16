@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# Copy source to the Pi and build its native Docker image there.
+set -euo pipefail
+
+usage() {
+  echo "Usage: $0 [user@host]"
+  echo "Default: pi@raspberrypi; remote directory: ~/quiet-news"
+}
+if [[ ${1:-} == --help || ${1:-} == -h ]]; then
+  usage
+  exit 0
+fi
+if (( $# > 1 )); then
+  usage >&2
+  exit 2
+fi
+target=${1:-pi@raspberrypi}
+if [[ ! $target =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.@:-]*$ ]]; then
+  echo "Invalid SSH destination: $target" >&2
+  exit 2
+fi
+for tool in ssh rsync; do
+  if ! command -v "$tool" >/dev/null 2>&1; then
+    echo "Required command not found: $tool" >&2
+    exit 1
+  fi
+done
+project_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+
+printf 'Preparing %s:~/quiet-news\n' "$target"
+ssh "$target" 'bash -s' <<'REMOTE'
+set -euo pipefail
+command -v rsync >/dev/null
+# Docker must be usable by the SSH user without an interactive sudo prompt.
+docker compose version
+mkdir -p "$HOME/quiet-news"
+REMOTE
+
+# No --delete: keep the Pi's configuration and any machine-local files.
+rsync -av \
+  --exclude '/.git/' \
+  --exclude '/node_modules/' \
+  --exclude '/data/' \
+  --include '/.env.example' \
+  --exclude '/.env*' \
+  --exclude '/.agents/' \
+  --exclude '/.codex/' \
+  --exclude '/.aws/' \
+  --exclude '/reports/' \
+  "$project_dir/" "$target:~/quiet-news/"
+
+printf 'Building and starting Quiet News on %s\n' "$target"
+ssh "$target" 'bash -s' <<'REMOTE'
+set -euo pipefail
+cd "$HOME/quiet-news"
+if [[ ! -f .env ]]; then
+  # A new Pi installation should be reachable on the home network.
+  sed 's/^BIND_ADDRESS=.*/BIND_ADDRESS=0.0.0.0/' .env.example > .env
+  echo "Created .env for LAN access."
+fi
+if ! docker compose up -d --build --wait --wait-timeout 180; then
+  docker compose logs --tail=50 news
+  exit 1
+fi
+docker compose ps
+printf '\nApplication port mapping: '
+docker compose port news 2468
+REMOTE
+
+printf '\nDeployment complete on %s. Use the port mapping above to open the app.\n' "$target"

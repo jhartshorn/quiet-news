@@ -1,0 +1,1322 @@
+{
+  "testedDate": "2026-10-15",
+  "method": "Five latest eligible items per feed, using current app downloader/parser and isolated actual server endpoints. Saved state, saved results, reader extraction and repeated cached read checked. Opening/ending text spot-checked. At least four useful reader responses required; a successful extractor response alone is not sufficient. These are API tests from the Mac, not a Pi browser UI test.",
+  "sources": [
+    {
+      "publisher": "Democracy Club",
+      "feed": "https://democracyclub.org.uk/blog/feed/",
+      "section": "elections",
+      "eligible": 5,
+      "samples": [
+        {
+          "url": "https://democracyclub.org.uk/blog/2026/09/21/why-are-uk-elections-so-different-each-year/",
+          "title": "Why are UK elections so different each year?",
+          "summary": "Have you bought your calendar for next year? Mark the first Thursday in May now! The UK \u2019s election calendar is confusing and constantly shifting. Why is it so difficult to tell people with confidence when their next election will occur? Here at Democracy Club we typically create the regular May elections in\u2026",
+          "publisher": "Democracy Club",
+          "published": 1789999273184,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7064,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://democracyclub.org.uk/blog/2026/07/31/mapping-northern-irelands-proposed-polling-places/",
+          "title": "Mapping Northern Ireland's proposed polling places",
+          "summary": "An interactive map of Northern Ireland\u2019s proposed new polling place scheme for next year\u2019s elections is now live for public consultation: check it out! The map will be available online until 2 October, when the consultation ends. The Electoral Office for Northern Ireland ( EONI ) has the largest and most complex\u2026",
+          "publisher": "Democracy Club",
+          "published": 1785490782203,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3260,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://democracyclub.org.uk/blog/2026/06/23/case-study-votewales-and-polling-place-accessibility/",
+          "title": "Case study: Vote.Wales and polling place accessibility",
+          "summary": "Working with Welsh electoral services, the Welsh Government, and the Electoral Management Board for Wales, Democracy Club collected and published accessibility information for over 2,000 polling places across Wales. \u201cWe created vote.wales to give people voting confidence. Allowing people to see what accessibility\u2026",
+          "publisher": "Democracy Club",
+          "published": 1782224147083,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3827,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://democracyclub.org.uk/blog/2026/06/03/2026-elections-user-feedback/",
+          "title": "2026 elections user feedback",
+          "summary": "During the election period, our digital tools WhoCanIVoteFor.co.uk and WhereDoIVote.co.uk processed 10.5 Million postcode searches. This marks our highest level of user activity since the 2024 General Election and our second-highest level of user activity ever! With increased traffic, we received lots of great\u2026",
+          "publisher": "Democracy Club",
+          "published": 1780499251180,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6895,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://democracyclub.org.uk/blog/2026/05/08/2026-postcode-search-summary/",
+          "title": "2026 postcode search summary",
+          "summary": "All of Scotland and Wales held elections on 7 May, alongside 136 English councils. In total, 220 GB councils organised elections. As usual, we received polling station data from all of them, as well as four additional councils with by-elections. Public interest in these elections was very high compared to previous\u2026",
+          "publisher": "Democracy Club",
+          "published": 1778234339026,
+          "sections": [
+            "elections",
+            "local"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2033,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Elections & Democracy",
+      "qualityNotes": "Election-data practitioners and civic infrastructure.",
+      "qualitySource": "https://democracyclub.org.uk/about/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "UCL Constitution Unit official",
+      "feed": "https://blogs.ucl.ac.uk/constitution-unit/feed/",
+      "section": "elections",
+      "eligible": 10,
+      "samples": [
+        {
+          "url": "https://blogs.ucl.ac.uk/constitution-unit/2026/10/15/should-the-uk-adopt-a-codified-or-written-constitution-the-case-in-favour/",
+          "title": "Should the UK adopt a codified or written constitution? The case in favour",
+          "summary": "Next week, the House of Lords will debate introducing a written constitution. This is also something that the Prime Minister, Andy Burnham, discussed over the summer. Sionaidh Douglas-Scott makes the case in favour of the UK adopting a written, or codified, constitution. A second post in this series, making the\u2026",
+          "publisher": "UCL Constitution Unit official",
+          "published": 1792036825000,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 8375,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.ucl.ac.uk/constitution-unit/2026/10/12/what-next-for-house-of-lords-reform-retirement-and-participation-requirements-have-been-proposed-but-andy-burnhams-government-must-couple-them-with-other-action/",
+          "title": "What next for House of Lords reform? Retirement and participation requirements have been proposed, but Andy Burnham\u2019s government must couple them with other action",
+          "summary": "Labour\u2019s manifesto made various promises on House of Lords reform. The first \u2013 removal of hereditary peers \u2013 was completed in May. In July, a committee reported on possible next steps to introduce retirement and participation requirements. Meg Russell reviews these, arguing they only make sense if coupled with\u2026",
+          "publisher": "UCL Constitution Unit official",
+          "published": 1791777633000,
+          "sections": [
+            "elections",
+            "finance"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 16553,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.ucl.ac.uk/constitution-unit/2026/10/09/openness-in-lobbying-is-good-for-public-trust-and-the-policy-process/",
+          "title": "Openness in lobbying is good for public trust and the policy process",
+          "summary": "As the Ethics and Integrity Commission approaches its first anniversary, Chief Executive Stu Sterling reflects on the recommendations made about lobbying in its first report, ahead of his appearance at a UCL Policy & Practice Seminar next week. In a democracy good governance depends on decision-makers hearing from\u2026",
+          "publisher": "UCL Constitution Unit official",
+          "published": 1791518445000,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6623,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.ucl.ac.uk/constitution-unit/2026/10/07/what-standard-procedures-should-apply-to-parliament-act-bills-in-their-second-session/",
+          "title": "What standard procedures should apply to Parliament Act bills in their second session?",
+          "summary": "The Terminally Ill Adults (End of Life) Bill was recently defeated at second reading in the House of Commons, thereby ending its chances of being passed into law under the Parliament Act 1911 or otherwise. Sir David Natzler, former Clerk of the House of Commons, sets out what standard \u2018second session\u2019 procedures\u2026",
+          "publisher": "UCL Constitution Unit official",
+          "published": 1791345602000,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 9887,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.ucl.ac.uk/constitution-unit/2026/10/05/the-effects-of-electoral-systems-a-new-constitution-unit-project/",
+          "title": "The effects of electoral systems: a new Constitution Unit project",
+          "summary": "Many claims are made about the effects of different voting systems, but to what extent are these backed up by evidence? And how might this evidence apply to Westminster elections? Alan Renwick introduces a new Constitution Unit project seeking to answer these questions in a way that is accessible for politicians,\u2026",
+          "publisher": "UCL Constitution Unit official",
+          "published": 1791172811000,
+          "sections": [
+            "elections"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 9743,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Elections & Democracy / Public Administration",
+      "qualityNotes": "University-based constitutional research and expert analysis.",
+      "qualitySource": "https://www.ucl.ac.uk/social-historical-sciences/constitution-unit",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Quanta Magazine",
+      "feed": "https://www.quantamagazine.org/feed/",
+      "section": "science",
+      "eligible": 5,
+      "samples": [
+        {
+          "url": "https://www.quantamagazine.org/how-do-fungi-keep-the-planet-healthy-20261015/",
+          "title": "How Do Fungi Keep the Planet Healthy?",
+          "summary": "Evolutionary biologist Toby Kiers explains how fungal networks in soil trade nutrients with plants, help keep carbon underground, and strike bargains without having a brain. The post How Do Fungi Keep the Planet Healthy? first appeared on Quanta Magazine",
+          "publisher": "Quanta Magazine",
+          "published": 1792071613000,
+          "sections": [
+            "science"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 57022,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.quantamagazine.org/triplet-of-ghostly-galaxies-hints-at-what-dark-matter-is-and-isnt-20261014/",
+          "title": "Triplet of \u2018Ghostly\u2019 Galaxies Hints at What Dark Matter Is \u2014 and Isn\u2019t",
+          "summary": "A collision may have left these galaxies without dark matter. That spells trouble for alternative gravity theories. The post Triplet of \u2018Ghostly\u2019 Galaxies Hints at What Dark Matter Is \u2014 and Isn\u2019t first appeared on Quanta Magazine",
+          "publisher": "Quanta Magazine",
+          "published": 1791986645000,
+          "sections": [
+            "science"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 10527,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.quantamagazine.org/is-attention-the-essence-of-intelligence-20261012/",
+          "title": "Is \u2018Attention\u2019 the Essence of Intelligence?",
+          "summary": "A mathematical mechanism enables AI models to process language at scale, undergirding the current AI revolution. Our columnist asks: Why is attention the key? The post Is \u2018Attention\u2019 the Essence of Intelligence? first appeared on Quanta Magazine",
+          "publisher": "Quanta Magazine",
+          "published": 1791814830000,
+          "sections": [
+            "science"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 14099,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.quantamagazine.org/how-does-life-unfold-a-landscape-metaphor-comes-into-its-own-20261009/",
+          "title": "How Does Life Unfold? A Landscape Metaphor Comes Into Its Own.",
+          "summary": "C.H. Waddington\u2019s powerful image of embryonic stem cells specializing on a rolling landscape has captivated biologists since the 1950s. Experimental data is finally confirming, and complicating, his visionary ideas. The post How Does Life Unfold? A Landscape Metaphor Comes Into Its Own. first appeared on Quanta\u2026",
+          "publisher": "Quanta Magazine",
+          "published": 1791554587000,
+          "sections": [
+            "science"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 21027,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.quantamagazine.org/as-ai-closed-in-on-unique-games-proof-researchers-raced-to-beat-the-machines-20261007/",
+          "title": "As AI Closed In on \u2018Unique Games\u2019 Proof, Researchers Raced to Beat the Machines",
+          "summary": "In the shadow of a rumored AI proof of one of the biggest problems in their field, three computer scientists rushed to publish their own milestone result. The post As AI Closed In on \u2018Unique Games\u2019 Proof, Researchers Raced to Beat the Machines first appeared on Quanta Magazine",
+          "publisher": "Quanta Magazine",
+          "published": 1791385726000,
+          "sections": [
+            "science"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 12323,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Science & Discovery",
+      "qualityNotes": "Editorially independent, fact-checked science journalism.",
+      "qualitySource": "https://www.quantamagazine.org/about/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Carbon Brief",
+      "feed": "https://www.carbonbrief.org/feed/",
+      "section": "energy",
+      "eligible": 12,
+      "samples": [
+        {
+          "url": "https://interactive.carbonbrief.org/nature-targets-2030-progress/",
+          "title": "COP17: Tracking progress towards the UN\u2019s 2030 nature targets",
+          "summary": "Countries will meet in Armenia this month to carry out the first global review of progress towards meeting key nature\u2026 The post COP17: Tracking progress towards the UN\u2019s 2030 nature targets appeared first on Carbon Brief .",
+          "publisher": "Carbon Brief",
+          "published": 1792080462000,
+          "sections": [
+            "energy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 30960,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.carbonbrief.org/cop17-developed-countries-fall-far-short-of-un-targets-for-nature-finance",
+          "title": "COP17: Developed countries \u2018fall far short\u2019 of UN targets for nature finance",
+          "summary": "The amount of finance for nature delivered to date \u201cfalls far short\u201d of what is needed to meet the UN\u2019s\u2026 The post COP17: Developed countries \u2018fall far short\u2019 of UN targets for nature finance appeared first on Carbon Brief .",
+          "publisher": "Carbon Brief",
+          "published": 1792078815000,
+          "sections": [
+            "energy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 8269,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.carbonbrief.org/interactive-tracking-negotiating-texts-at-the-cop17-biodiversity-summit",
+          "title": "Interactive: Tracking negotiating texts at the COP17 biodiversity summit",
+          "summary": "Next week, diplomats from around the world will descend on Yerevan, Armenia, to negotiate a series of decisions under the\u2026 The post Interactive: Tracking negotiating texts at the COP17 biodiversity summit appeared first on Carbon Brief .",
+          "publisher": "Carbon Brief",
+          "published": 1791815466000,
+          "sections": [
+            "energy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3664,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.carbonbrief.org/factcheck-uk-conservatives-double-the-cost-of-net-zero-after-spreadsheet-blunder",
+          "title": "Factcheck: UK Conservatives double the \u2018cost of net-zero\u2019 after spreadsheet blunder",
+          "summary": "A booklet published by the UK\u2019s opposition Conservative party includes a \u201ccost of net-zero\u201d that appears to have been doubled\u2026 The post Factcheck: UK Conservatives double the \u2018cost of net-zero\u2019 after spreadsheet blunder appeared first on Carbon Brief .",
+          "publisher": "Carbon Brief",
+          "published": 1791525600000,
+          "sections": [
+            "energy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4245,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.carbonbrief.org/analysis-wind-and-solar-save-uk-from-gas-imports-worth-5-9bn-during-hormuz-crisis",
+          "title": "Analysis: Wind and solar save UK from gas imports worth \u00a35.9bn during Hormuz crisis",
+          "summary": "The UK has avoided the need for gas imports worth \u00a35.9bn since the start of the Hormuz crisis as a\u2026 The post Analysis: Wind and solar save UK from gas imports worth \u00a35.9bn during Hormuz crisis appeared first on Carbon Brief .",
+          "publisher": "Carbon Brief",
+          "published": 1790777521000,
+          "sections": [
+            "energy"
+          ],
+          "kind": "Analysis",
+          "saved": true,
+          "readerError": null,
+          "characters": 3957,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Energy & Climate",
+      "qualityNotes": "Specialist climate and energy reporting and data analysis. Interactive elements are not preserved.",
+      "qualitySource": "https://www.carbonbrief.org/about",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "NIHR Evidence",
+      "feed": "https://evidence.nihr.ac.uk/feed/",
+      "section": "health",
+      "eligible": 50,
+      "samples": [
+        {
+          "url": "https://evidence.nihr.ac.uk/collection/cardiovascular-disease-new-ways-to-detect-risk-and-improve-outcomes/",
+          "title": "Cardiovascular disease: new ways to detect risk and improve outcomes",
+          "summary": "Cardiovascular disease (conditions affecting the heart or blood vessels) accounts for around 1 in 4 deaths in the UK each year, according to the British Heart Foundation, with healthcare costs in England estimated at \u00a310 billion a year. A person\u2019s risk of cardiovascular disease depends on their blood pressure,\u2026",
+          "publisher": "NIHR Evidence",
+          "published": 1753176405000,
+          "sections": [
+            "health"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 5074,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://evidence.nihr.ac.uk/collection/prostate-cancer-research-whats-next/",
+          "title": "Prostate cancer research: what's next?",
+          "summary": "Prostate cancer is the most common cancer in men, with more than 55,000 new cases each year in the UK. Most men with localised cancer (confined to the prostate) are likely to live for a long time. Treatment options for localised cancer are based on how likely the cancer is to spread beyond the prostate. Based on ...",
+          "publisher": "NIHR Evidence",
+          "published": 1743412448000,
+          "sections": [
+            "health"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 5894,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://evidence.nihr.ac.uk/alert/population-level-policies-on-risk-factors-for-dementia-could-reduce-costs/",
+          "title": "Population-level policies on risk factors for dementia could reduce costs",
+          "summary": "This is a plain English summary of an original research article. The views expressed are those of the author(s) and reviewer(s) at the time of publication. Population-level health interventions relating to high blood pressure, smoking and obesity, for example, become more effective and cost effective when their\u2026",
+          "publisher": "NIHR Evidence",
+          "published": 1743403688000,
+          "sections": [
+            "health"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6699,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://evidence.nihr.ac.uk/collection/hospital-at-home-and-virtual-wards-what-works/",
+          "title": "Hospital at home and virtual wards: What works?",
+          "summary": "Hospital at home and virtual wards provide safe alternatives to hospital care in the community. There is considerable variation in how they are operationalised at a local level. In general, their common feature is to provide healthcare in people\u2019s homes through a multidisciplinary clinical team. Care is delivered\u2026",
+          "publisher": "NIHR Evidence",
+          "published": 1743402432000,
+          "sections": [
+            "health"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6861,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://evidence.nihr.ac.uk/alert/culturally-adapted-therapy-improved-postnatal-depression-in-british-south-asian-women/",
+          "title": "Culturally-adapted therapy improved postnatal depression in British South Asian women",
+          "summary": "Cognitive behavioural therapy (CBT) is recommended for women with postnatal depression. But there is limited evidence for the effectiveness of this talking therapy in minority ethnic groups. Researchers developed culturally-adapted therapy. They found that it helped British women from South Asian backgrounds\u2026",
+          "publisher": "NIHR Evidence",
+          "published": 1741856400000,
+          "sections": [
+            "health"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 8114,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Health & Longevity",
+      "qualityNotes": "Research summaries from NIHR; summaries are not the underlying journal papers.",
+      "qualitySource": "https://evidence.nihr.ac.uk/about-us/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "EFF",
+      "feed": "https://www.eff.org/rss/updates.xml",
+      "section": "privacy",
+      "eligible": 50,
+      "samples": [
+        {
+          "url": "https://www.eff.org/deeplinks/2026/10/were-asking-wisconsin-supreme-court-end-warrantless-alpr-searches",
+          "title": "We\u2019re Asking the Wisconsin Supreme Court to End Warrantless ALPR Searches",
+          "summary": "Today, EFF joined the ACLU of Wisconsin in filing a petition to the Wisconsin Supreme Court, asking it to rule that the state\u2019s constitution requires a warrant for retrospective searches of ALPR databases used by law enforcement in four cities: Milwaukee, Racine, Kenosha, and Green Bay. We represent a religious\u2026",
+          "publisher": "EFF",
+          "published": 1792020097000,
+          "sections": [
+            "privacy",
+            "us"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2165,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.eff.org/deeplinks/2026/10/dhs-inspector-general-finds-tsa-not-properly-safeguarding-passenger-facial",
+          "title": "DHS Inspector General Finds That TSA is Not Properly Safeguarding Passenger Facial Recognition Data",
+          "summary": "EFF legal intern Gabrielle Ladun was the principal author of this post. The Department of Homeland Security Office of Inspector General (DHS OIG) has published a summary of findings from its audit of the Transportation Security Administration\u2019s (TSA) facial recognition technology. While the detailed findings are\u2026",
+          "publisher": "EFF",
+          "published": 1792009633000,
+          "sections": [
+            "privacy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3398,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.eff.org/deeplinks/2026/10/victory-freedom-speech-online-effector-3818",
+          "title": "\ud83d\udde3 A Victory for Freedom of Speech Online | EFFector 38.18",
+          "summary": "No one should have to think twice before criticizing the government online. But a mass surveillance program known as \"Catch and Revoke\" was created to make millions do just that. EFF and other defenders of free speech are fighting back. In our latest EFFector newsletter , we're talking about a key court win for our\u2026",
+          "publisher": "EFF",
+          "published": 1791995123000,
+          "sections": [
+            "privacy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1349,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.eff.org/deeplinks/2026/10/federal-court-rules-alprs-are-mass-surveillance-eff-gets-disappointing-ruling",
+          "title": "As Federal Court Rules ALPRs are Mass Surveillance, EFF Gets Disappointing Ruling",
+          "summary": "In an extremely disappointing ruling , a California trial court dismissed SIREN v. San Jose , our case challenging the city of San Jose\u2019s warrantless searches of its vast stores of automated license plate reader (ALPR) data. EFF and the ACLU of Northern California represent SIREN and CAIR California, two\u2026",
+          "publisher": "EFF",
+          "published": 1791911959000,
+          "sections": [
+            "privacy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3865,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.eff.org/deeplinks/2026/10/privacys-defenders-podcast-no-privacy-without-encryption",
+          "title": "Privacy's Defenders Podcast: No Privacy Without Encryption",
+          "summary": "When we communicate online today \u2013 from your personal emails and DMs to secure international commerce \u2013 we usually do so with encryption. Encryption converts readable data into unreadable gibberish to protect our privacy and security. This didn\u2019t just happen organically. Three decades ago, the U.S government\u2026",
+          "publisher": "EFF",
+          "published": 1791903603000,
+          "sections": [
+            "privacy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2557,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Digital Privacy & Security",
+      "qualityNotes": "Digital-rights legal and technical expertise; advocacy perspective. Podcast page text is not guaranteed to include a transcript.",
+      "qualitySource": "https://www.eff.org/about",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "KDE Blogs",
+      "feed": "https://blogs.kde.org/index.xml",
+      "section": "selfhosted",
+      "eligible": 20,
+      "samples": [
+        {
+          "url": "https://blogs.kde.org/2026/10/11/this-quarter-in-kde-digital-sovereignty-q3-2026/",
+          "title": "This Quarter in KDE Digital Sovereignty: Q3 2026",
+          "summary": "Welcome to the latest edition of This Quarter in KDE Digital Sovereignty! This blog series covers the work done throughout KDE\u2019s software stack that\u2019s funded by the investment KDE received earlier this year from Germany\u2019s Sovereign Tech Agency . Commissioned work on a variety of projects has been done by KDE\u2026",
+          "publisher": "KDE Blogs",
+          "published": 1791676861000,
+          "sections": [
+            "selfhosted",
+            "finance"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7644,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.kde.org/2026/10/10/this-week-in-plasma-finishing-touches-on-6.8/",
+          "title": "This Week in Plasma: Finishing Touches on 6.8",
+          "summary": "Welcome to a new issue of This Week in Plasma! This week, Plasma contributors put the finishing touches on Plasma 6.8, which is due to be released early next week, on October 14th. A lot of the work was behind the scenes, and that\u2019s why this week\u2019s update may look a bit light. But nevertheless, here\u2019s the bigger\u2026",
+          "publisher": "KDE Blogs",
+          "published": 1791590401000,
+          "sections": [
+            "selfhosted"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3453,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.kde.org/2026/10/06/my-notes-from-akademy-2026/",
+          "title": "My Notes from Akademy 2026",
+          "summary": "Writing this blog today feels a bit unreal. Six months ago, if you had told me I'd be attending Akademy in-person, 3000 miles from home - I probably wouldn't have believed you. And yet, here we are. So I attended Akademy 2026, in Graz - and my experience was truly remarkable. I learnt a lot about the KDE Community,\u2026",
+          "publisher": "KDE Blogs",
+          "published": 1791244800000,
+          "sections": [
+            "selfhosted"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2492,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.kde.org/2026/10/03/this-week-in-plasma-6.8-beta-2-keep-testing/",
+          "title": "This Week in Plasma: 6.8 Beta 2; Keep Testing!",
+          "summary": "Welcome to a new issue of This Week in Plasma! This week, Plasma 6.8 continues to pass through the bug-fixing process in preparation for its release on October 14th, including the release of a second beta version . So far we still don\u2019t have many reported regressions , so again either Plasma 6.8 is amazing already,\u2026",
+          "publisher": "KDE Blogs",
+          "published": 1790985601000,
+          "sections": [
+            "selfhosted"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6575,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://blogs.kde.org/2026/10/03/kde-layman-tutorial/",
+          "title": "KDE Code Contributing: A layman-oriented tutorial",
+          "summary": "I always thought contributiong to a project should be easily understood. So I recorded the whole process and made this tutorial. I want every step to be as easily understood and as determenistic as possible. So, let's begin! Step 1: Setting up distrobox (optional) In this tutorial we will use distrobox. You may\u2026",
+          "publisher": "KDE Blogs",
+          "published": 1790985600000,
+          "sections": [
+            "selfhosted"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6695,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Self-Hosted & Open Source",
+      "qualityNotes": "Primary-source updates from the KDE community; includes contributor experiences and tutorials.",
+      "qualitySource": "https://blogs.kde.org/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "GamingOnLinux",
+      "feed": "https://www.gamingonlinux.com/article_rss.php",
+      "section": "gaming",
+      "eligible": 50,
+      "samples": [
+        {
+          "url": "https://www.gamingonlinux.com/2026/10/the-elder-scrolls-iv-oblivion-and-ghostwire-tokyo-enter-the-gog-preservation-program/",
+          "title": "The Elder Scrolls IV: Oblivion and Ghostwire: Tokyo enter the GOG Preservation Program",
+          "summary": "The GOG Preservation Program has expanded to include another two fun games with The Elder Scrolls IV: Oblivion and Ghostwire: Tokyo. Read the full article on GamingOnLinux .",
+          "publisher": "GamingOnLinux",
+          "published": 1792071374000,
+          "sections": [
+            "gaming"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1558,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.gamingonlinux.com/2026/10/ubuntu-26-10-stonking-stingray-released/",
+          "title": "Ubuntu 26.10 (Stonking Stingray) released",
+          "summary": "Ubuntu 26.10 (Stonking Stingray) released, as the latest upgrade to the popular Linux distribution. Read the full article on GamingOnLinux .",
+          "publisher": "GamingOnLinux",
+          "published": 1792064113000,
+          "sections": [
+            "gaming",
+            "selfhosted"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3020,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.gamingonlinux.com/2026/10/new-fighting-game-poly-fighter-combines-roguelike-features-to-build-your-fighter/",
+          "title": "New fighting game Poly Fighter combines roguelike features to build your fighter",
+          "summary": "Poly Fighter is a new Early Access fighting game designed to be for solo play, with you building up your own fighter with each win. Read the full article on GamingOnLinux .",
+          "publisher": "GamingOnLinux",
+          "published": 1792058385000,
+          "sections": [
+            "gaming"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2509,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.gamingonlinux.com/2026/10/humble-bundle-has-two-new-bundles-full-of-horror-and-factory-building-games/",
+          "title": "Humble Bundle has two new bundles full of horror and factory-building games",
+          "summary": "Humble Bundle has launched two new game bundles with very different themes: one built around Halloween horror, and the other all about factories and automation. Read the full article on GamingOnLinux .",
+          "publisher": "GamingOnLinux",
+          "published": 1792057106000,
+          "sections": [
+            "gaming"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 736,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.gamingonlinux.com/2026/10/speed-through-strange-retro-worlds-in-the-strategic-roguelike-racer-reality-drift-demo/",
+          "title": "Speed through strange retro worlds in the strategic roguelike racer Reality Drift demo",
+          "summary": "Available with a demo now - Reality Drift is a retro strategic roguelike racing game where you battle through a series of strange worlds. Read the full article on GamingOnLinux .",
+          "publisher": "GamingOnLinux",
+          "published": 1792055650000,
+          "sections": [
+            "gaming"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1780,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Gaming & Emulation",
+      "qualityNotes": "Independent specialist Linux/Steam Deck reporting with a corrections process. Some deal posts.",
+      "qualitySource": "https://www.gamingonlinux.com/about-us/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Public Domain Review",
+      "feed": "https://publicdomainreview.org/rss.xml",
+      "section": "history",
+      "eligible": 60,
+      "samples": [
+        {
+          "url": "https://publicdomainreview.org/essay/the-jumping-frenchmen-of-maine",
+          "title": "\u201cMen with Queer Nerves\u201d: The Jumping Frenchmen of Maine",
+          "summary": "In the late nineteenth century, visitors to Maine observed something strange: French-Canadian lumberjacks who, at the slightest stimulus, seemed to jump, strike out with their limbs, or mimic languages they could not speak. Ross Bullen introduces us to these so-called \u201cJumping Frenchmen\u201d and to their greatest\u2026",
+          "publisher": "Public Domain Review",
+          "published": 1791978960000,
+          "sections": [
+            "history"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 23081,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://publicdomainreview.org/collection/kalvach-postcards",
+          "title": "Rudolf Kalvach\u2019s Wiener Werkst\u00e4tte Postcards (1907)",
+          "summary": "Postcards that summon medieval grotesques and brightly coloured folk art, but also feel distinctly modern.",
+          "publisher": "Public Domain Review",
+          "published": 1791897000000,
+          "sections": [
+            "history"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6360,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://publicdomainreview.org/collection/history-of-the-devil",
+          "title": "Paul Carus\u2019 The History of the Devil and the Idea of Evil (1899)",
+          "summary": "A history of the Evil One, from the earliest times to the present.",
+          "publisher": "Public Domain Review",
+          "published": 1791380040000,
+          "sections": [
+            "history"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 8000,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://publicdomainreview.org/collection/mutus-liber",
+          "title": "The Alchemical Transformations of the Mutus Liber (1677)",
+          "summary": "Carl Jung\u2019s copy of the \u201cmute book\u201d, an alchemical manual charting (through a series of images) the \u201chumid way\u201d of forging the Philosopher\u2019s Stone.",
+          "publisher": "Public Domain Review",
+          "published": 1791291600000,
+          "sections": [
+            "history"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6601,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://publicdomainreview.org/essay/philip-sidney-and-the-extreme-disgraces-of-the-parenthesis",
+          "title": "Philip Sidney and the Extreme (Dis)graces of the Parenthesis",
+          "summary": "Erasmus called them \u201clittle moons\u201d and George Puttenham praised them as \u201cfigures of tolerable disorder\u201d (if used not too often \u201cnor too thick\u201d). For Philip Sidney, they were simply indispensable. Florence Hazrat introduces us to the uncontested early modern king of brackets and to his romance Arcadia , which\u2026",
+          "publisher": "Public Domain Review",
+          "published": 1790783520000,
+          "sections": [
+            "history"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 12532,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "History & Ideas / Books & Literature",
+      "qualityNotes": "Curated historical essays and archival material; illustrations are not preserved by the reader.",
+      "qualitySource": "https://publicdomainreview.org/about/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Public Books",
+      "feed": "https://www.publicbooks.org/feed/",
+      "section": "books",
+      "eligible": 10,
+      "samples": [
+        {
+          "url": "https://www.publicbooks.org/what-happens-when-belief-stops-mattering/",
+          "title": "What Happens When Belief Stops Mattering?",
+          "summary": "\u201cFrom the crushing of the Prague Spring in 1968 to the advent of Gorbachev\u2019s glasnost in the mid-1980s, the Soviet Union was sustained not by terror or conviction, but by something harder to name: a routinization of participation.\u201d The post What Happens When Belief Stops Mattering? appeared first on Public Books .",
+          "publisher": "Public Books",
+          "published": 1792076400000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 17850,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.publicbooks.org/burglaries-assassinations-and-mind-control-talking-the-50th-anniversary-of-the-church-committee-report-with-matthew-guariglia-and-brian-hochman/",
+          "title": "Burglaries, Assassinations, and Mind Control: Talking the 50th Anniversary of the Church Committee Report with Matthew Guariglia and Brian Hochman",
+          "summary": "\u201cDespite what the law says, the government still spies on people because of their political beliefs. What is new is the scale to which the government can collect data very, very easily.\u201d The post Burglaries, Assassinations, and Mind Control: Talking the 50th Anniversary of the Church Committee Report with Matthew\u2026",
+          "publisher": "Public Books",
+          "published": 1791990000000,
+          "sections": [
+            "books",
+            "privacy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 22014,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.publicbooks.org/hispanic-heritage-is-hemispheric-sovereignty/",
+          "title": "\u201cHispanic Heritage\u201d Is Hemispheric Sovereignty",
+          "summary": "What unites the nations and peoples represented in the United States' \u201cHispanic Heritage Month\u201d? And what should we be celebrating? The post \u201cHispanic Heritage\u201d Is Hemispheric Sovereignty appeared first on Public Books .",
+          "publisher": "Public Books",
+          "published": 1791903600000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 16114,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.publicbooks.org/indie-presses-and-the-literary-ecosystem-meg-reid-and-will-evans/",
+          "title": "Indie Presses and the Literary Ecosystem: Meg Reid and Will Evans",
+          "summary": "\u201cThe literary ecosystem is for every reader of every age. It is for every writer of every style.\u201d The post Indie Presses and the Literary Ecosystem: Meg Reid and Will Evans appeared first on Public Books .",
+          "publisher": "Public Books",
+          "published": 1791558000000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3304,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.publicbooks.org/the-golden-age-of-tv/",
+          "title": "The Golden Age of TV",
+          "summary": "\u201cDanielewski, it seems, is not acting as a writer here, but as a hoarder of phrases, the more redolent of a vanished \u201cWestern\u201d mode of living, the better.\u201d The post The Golden Age of TV appeared first on Public Books .",
+          "publisher": "Public Books",
+          "published": 1791471600000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 20917,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Books & Literature / History & Ideas",
+      "qualityNotes": "Scholar-led criticism, essays and interviews. Podcast entries may provide show notes rather than transcripts.",
+      "qualitySource": "https://www.publicbooks.org/about/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Literary Hub",
+      "feed": "https://lithub.com/feed/",
+      "section": "books",
+      "eligible": 10,
+      "samples": [
+        {
+          "url": "https://lithub.com/5-book-reviews-you-need-to-read-this-week-18/",
+          "title": "5 Book Reviews You Need to Read This Week",
+          "summary": "Our quintet of quality reviews this week includes Joanna Scutts on Shawn Gude\u2019s American Socialist, Dwight Garner on Barbara Trapido\u2019s Brother of the More Famous Jack, Rhian Sasseen on Meghan O\u2019Gieblyn\u2019s Will and Attention, Lily Meyer on Madeline ffitch\u2019s Avalon, Rise, and Max Callimanopulos",
+          "publisher": "Literary Hub",
+          "published": 1792065025000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 12459,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://lithub.com/lit-hub-daily-october-15-2026/",
+          "title": "Lit Hub Daily: October 15, 2026",
+          "summary": "You\u2019ve heard of cottagecore, but what about bogcore? Anna North introduces you to the genre via work by Annie Proulx, Kay Chronister, Seamus Heaney and more. | Lit Hub Criticism Why are publishers suing big tech with one hand and",
+          "publisher": "Literary Hub",
+          "published": 1792060248000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2462,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://lithub.com/the-end-of-everything/",
+          "title": "The End of Everything",
+          "summary": "For years Phillip Tennent lived at the edge of the sea, where artefacts were washed up every day. Scavengers, professional and otherwise, came and went. Turnover was higher than you\u2019d expect given the relaxed lifestyle, the constant good weather, the",
+          "publisher": "Literary Hub",
+          "published": 1792056024000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 9757,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://lithub.com/why-are-publishers-suing-big-tech-with-one-hand-and-embracing-ai-with-the-other/",
+          "title": "Why Are Publishers Suing Big Tech With One Hand and Embracing AI With the Other?",
+          "summary": "Last weekend I had a little stagefright before I was set to appear on a panel about authorship and AI for an event called Whose Truth? Writers and Readers Forum presented by the Authors Guild. I had a feeling I\u2019d",
+          "publisher": "Literary Hub",
+          "published": 1792055437000,
+          "sections": [
+            "books"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4465,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://lithub.com/anna-north-on-the-genre-you-didnt-know-you-needed-bogcore/",
+          "title": "Anna North on the Genre You Didn\u2019t Know You Needed: Bogcore",
+          "summary": "Bogs are big right now. Fashion designers are dipping couture in peat; memes on Instagram offer help choosing your bog witch name. Internationally bestselling authors are (figuratively) mining wetlands for inspiration. The bog and its cousins the swamp and marsh",
+          "publisher": "Literary Hub",
+          "published": 1792055394000,
+          "sections": [
+            "books",
+            "energy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4841,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Books & Literature",
+      "qualityNotes": "Established literary publication with named editors and publishing partners; mixes essays, interviews and reading roundups.",
+      "qualitySource": "https://lithub.com/about-literary-hub/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Energy Saving Trust",
+      "feed": "https://energysavingtrust.org.uk/feed/",
+      "section": "home",
+      "eligible": 10,
+      "samples": [
+        {
+          "url": "https://energysavingtrust.org.uk/plug-in-solar-panels-now-available/",
+          "title": "Households can save hundreds off bills as plug-in solar panels come to market",
+          "summary": "The post Households can save hundreds off bills as plug-in solar panels come to market appeared first on Energy Saving Trust .",
+          "publisher": "Energy Saving Trust",
+          "published": 1787823932000,
+          "sections": [
+            "home"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3703,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://energysavingtrust.org.uk/integrated-electric-home-case-study/",
+          "title": "How Brian matched renewable tech with smart tariff to slash his energy bills",
+          "summary": "The post How Brian matched renewable tech with smart tariff to slash his energy bills appeared first on Energy Saving Trust .",
+          "publisher": "Energy Saving Trust",
+          "published": 1786522588000,
+          "sections": [
+            "home",
+            "energy"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 9112,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://energysavingtrust.org.uk/takeaways-from-our-warm-homes-plan-event/",
+          "title": "How local authorities can turn the Warm Homes Plan into action \u2013 takeaways from our event",
+          "summary": "The post How local authorities can turn the Warm Homes Plan into action \u2013 takeaways from our event appeared first on Energy Saving Trust .",
+          "publisher": "Energy Saving Trust",
+          "published": 1785400532000,
+          "sections": [
+            "home",
+            "local"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7276,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://energysavingtrust.org.uk/electricity-vat-removal-response/",
+          "title": "Our response to UK Government changes and removal of VAT from electricity bills",
+          "summary": "The post Our response to UK Government changes and removal of VAT from electricity bills appeared first on Energy Saving Trust .",
+          "publisher": "Energy Saving Trust",
+          "published": 1784708135000,
+          "sections": [
+            "home"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4038,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://energysavingtrust.org.uk/clean-tech-combo-could-help-households-beat-rising-energy-bills/",
+          "title": "Clean tech combo could help households beat rising energy bills",
+          "summary": "The post Clean tech combo could help households beat rising energy bills appeared first on Energy Saving Trust .",
+          "publisher": "Energy Saving Trust",
+          "published": 1784103396000,
+          "sections": [
+            "home"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3329,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Home & Sustainable Living",
+      "qualityNotes": "Specialist energy advice, analysis and policy updates.",
+      "qualitySource": "https://energysavingtrust.org.uk/about-us/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "The Violin Channel",
+      "feed": "https://theviolinchannel.com/feed/",
+      "section": "music",
+      "eligible": 15,
+      "samples": [
+        {
+          "url": "https://theviolinchannel.com/stuttgart-international-violin-competition-announces-2027-candidates/",
+          "title": "Stuttgart International Violin Competition Announces 2027 Candidates",
+          "summary": "[\u2026] The post Stuttgart International Violin Competition Announces 2027 Candidates appeared first on World's Leading Classical Music Platform .",
+          "publisher": "The Violin Channel",
+          "published": 1792092243000,
+          "sections": [
+            "music"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 3259,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://theviolinchannel.com/banff-international-string-quartet-festival-to-premiere-three-concerts-on-the-violin-channel/",
+          "title": "Banff International String Quartet Festival to Premiere Three Concerts on The Violin Channel",
+          "summary": "[\u2026] The post Banff International String Quartet Festival to Premiere Three Concerts on The Violin Channel appeared first on World's Leading Classical Music Platform .",
+          "publisher": "The Violin Channel",
+          "published": 1792087463000,
+          "sections": [
+            "music"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1801,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://theviolinchannel.com/violinist-maria-duenas-signs-with-kd-schmid/",
+          "title": "Violinist Mar\u00eda Due\u00f1as Signs with KD SCHMID",
+          "summary": "[\u2026] The post Violinist Mar\u00eda Due\u00f1as Signs with KD SCHMID appeared first on World's Leading Classical Music Platform .",
+          "publisher": "The Violin Channel",
+          "published": 1792083800000,
+          "sections": [
+            "music"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 2299,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://theviolinchannel.com/vc-live-2026-barbash-bach-competition/",
+          "title": "VC LIVE | 2026 Barbash Bach Competition",
+          "summary": "[\u2026] The post VC LIVE | 2026 Barbash Bach Competition appeared first on World's Leading Classical Music Platform .",
+          "publisher": "The Violin Channel",
+          "published": 1792080864000,
+          "sections": [
+            "music"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1147,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://theviolinchannel.com/twoset-violins-brett-yang-and-eddy-chen-to-part-ways/",
+          "title": "TwoSet Violin's Brett Yang and Eddy Chen to Part Ways",
+          "summary": "[\u2026] The post TwoSet Violin's Brett Yang and Eddy Chen to Part Ways appeared first on World's Leading Classical Music Platform .",
+          "publisher": "The Violin Channel",
+          "published": 1792012511000,
+          "sections": [
+            "music"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 1903,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Classical & World Music",
+      "qualityNotes": "Specialist classical performance news. Livestream pages archive their text descriptions, not performances.",
+      "qualitySource": "https://theviolinchannel.com/",
+      "usableReaderSamples": 5
+    },
+    {
+      "publisher": "Bank of England",
+      "feed": "https://www.bankofengland.co.uk/rss/news",
+      "section": "economics",
+      "eligible": 50,
+      "samples": [
+        {
+          "url": "https://www.bankofengland.co.uk/news/2026/october/david-roberts-tsc-reappointment",
+          "title": "David Roberts CV and questionnaire for the Treasury Select Committee",
+          "summary": "Published for the Treasury Select Committee",
+          "publisher": "Bank of England",
+          "published": 1792057961000,
+          "sections": [
+            "economics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 895,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.bankofengland.co.uk/minutes/2026/september/sonia-stakeholder-advisory-group-25-september-2026",
+          "title": "Minutes of the SONIA Stakeholder Advisory Group - 25 September 2026",
+          "summary": "The SONIA Stakeholder Advisory Group supports the Bank\u2019s administration of SONIA by providing advice and technical input to the Bank and the SONIA Oversight Committee",
+          "publisher": "Bank of England",
+          "published": 1792052879000,
+          "sections": [
+            "economics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7047,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.bankofengland.co.uk/minutes/2026/september/money-markets-committee-minutes-september-2026",
+          "title": "Minutes of the Money Market Committee meeting \u2013 September 2026",
+          "summary": "The Money Markets Committee is a forum for market participants and authorities to discuss the UK unsecured deposits and funding market and securities lending and repo markets.",
+          "publisher": "Bank of England",
+          "published": 1791903867000,
+          "sections": [
+            "economics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 8444,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.bankofengland.co.uk/news/2026/october/cmorg-holds-sector-wide-cloud-outage-simulation-exercise",
+          "title": "CMORG holds sector-wide cloud outage simulation exercise",
+          "summary": "The Cross-Market Operational Resilience Group (CMORG) yesterday (8 October 2026) completed its biennial simulation exercise, known as SIMEX26, focused this year on a global cloud services disruption.",
+          "publisher": "Bank of England",
+          "published": 1791536400000,
+          "sections": [
+            "economics",
+            "health"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4169,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://www.bankofengland.co.uk/news/2026/october/boe-announces-the-four-animals-that-will-feature-on-next-series-of-banknotes",
+          "title": "Bank of England announces the four animals that will feature on our next series of banknotes",
+          "summary": "The Atlantic puffin, barn owl, buff-tailed bumblebee and European hedgehog will represent UK wildlife and feature as the central images on our next series of banknotes.",
+          "publisher": "Bank of England",
+          "published": 1791414060000,
+          "sections": [
+            "economics"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 6371,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Economics & Public Finance",
+      "qualityNotes": "Primary source for central-bank releases; cookie/navigation text can remain. One sample was a document landing page, so counted as not substantially useful.",
+      "qualitySource": "https://www.bankofengland.co.uk/",
+      "usableReaderSamples": 4
+    },
+    {
+      "publisher": "Monevator",
+      "feed": "https://monevator.com/feed/",
+      "section": "finance",
+      "eligible": 12,
+      "samples": [
+        {
+          "url": "https://monevator.com/surviving-economic-meltdown/",
+          "title": "Surviving economic meltdown",
+          "summary": "Why your stake in a global tracker fund won't put bread on the table, post-Apocalypse\u2026 The post Surviving economic meltdown appeared first on Monevator .",
+          "publisher": "Monevator",
+          "published": 1792055143000,
+          "sections": [
+            "finance"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7507,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://monevator.com/automatic-investing/",
+          "title": "I, Robot",
+          "summary": "Investing is a soap opera that provokes return-wrecking emotions. Reduce your emotional involvement to that of a car factory robot via automatic investing. The post I, Robot appeared first on Monevator .",
+          "publisher": "Monevator",
+          "published": 1791886850000,
+          "sections": [
+            "finance",
+            "music"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 7236,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://monevator.com/weekend-reading-who-wants-to-see-a-billionaire/",
+          "title": "Weekend reading: Who wants to see a billionaire?",
+          "summary": "Losing billionaires is one thing, but what about the would-be millionaires\u2026 The post Weekend reading: Who wants to see a billionaire? appeared first on Monevator .",
+          "publisher": "Monevator",
+          "published": 1791628201000,
+          "sections": [
+            "finance"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": "Only a short excerpt could be extracted.",
+          "characters": 0,
+          "cacheWorks": false
+        },
+        {
+          "url": "https://monevator.com/what-would-it-cost-to-replace-the-state-pension-yourself/",
+          "title": "What would it cost to replace the State Pension yourself?",
+          "summary": "If it comes to the worst\u2026 The post What would it cost to replace the State Pension yourself? appeared first on Monevator .",
+          "publisher": "Monevator",
+          "published": 1791462004000,
+          "sections": [
+            "finance"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 11181,
+          "cacheWorks": true
+        },
+        {
+          "url": "https://monevator.com/the-slow-and-steady-passive-portfolio-update-q3-2026/",
+          "title": "The Slow and Steady passive portfolio update: Q3 2026",
+          "summary": "Bonds blew up, but the portfolio didn't\u2026 The post The Slow and Steady passive portfolio update: Q3 2026 appeared first on Monevator .",
+          "publisher": "Monevator",
+          "published": 1791280636000,
+          "sections": [
+            "finance"
+          ],
+          "kind": "News",
+          "saved": true,
+          "readerError": null,
+          "characters": 4766,
+          "cacheWorks": true
+        }
+      ],
+      "recommendedSection": "Personal Finance & Investing",
+      "qualityNotes": "UK investing commentary with a passive-investing focus and commercial/affiliate links. One sampled article failed extraction.",
+      "qualitySource": "https://monevator.com/about/",
+      "usableReaderSamples": 4
+    }
+  ]
+}
