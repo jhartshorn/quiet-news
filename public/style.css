@@ -653,6 +653,9 @@ header {
   max-width: 760px;
   padding-top: 20px;
 }
+.reader-return {
+  margin-top: 32px;
+}
 .reader-main h1 {
   font:
     normal clamp(28px, 5vw, 42px)/1.2 Georgia,

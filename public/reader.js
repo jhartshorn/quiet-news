@@ -9,6 +9,7 @@ try {
     home = destination.pathname + destination.search + destination.hash;
 } catch {}
 $("#reader-home").href = home;
+$("#reader-home-bottom").href = home;
 $(".reader-brand").href = home;
 let article;
 async function api(url, method = "GET", body) {
