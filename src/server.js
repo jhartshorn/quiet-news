@@ -1,8 +1,5 @@
 import { Worker } from "node:worker_threads";
 import http from "node:http";
-import https from "node:https";
-import dns from "node:dns/promises";
-import net from "node:net";
 import { timingSafeEqual, createHash, randomUUID } from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { mkdirSync, readFileSync } from "node:fs";
@@ -10,6 +7,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { SnapshotCache } from "./snapshot-cache.js";
 import { sendSnapshot } from "./http-response.js";
+import { download, ARTICLE_MAX_BYTES } from "./download.js";
 import {
   defaultFeeds,
   sections,
@@ -141,100 +139,6 @@ const retention = Math.max(
   2,
   Math.min(365, Number(process.env.RETENTION_DAYS) || 30),
 );
-function publicAddress(ip) {
-  if (net.isIP(ip) === 4) {
-    const [a, b] = ip.split(".").map(Number);
-    return !(
-      a === 0 ||
-      a === 10 ||
-      a === 127 ||
-      (a === 169 && b === 254) ||
-      (a === 172 && b >= 16 && b <= 31) ||
-      (a === 192 && b === 168) ||
-      (a === 100 && b >= 64 && b <= 127) ||
-      a >= 224 ||
-      (a === 198 && [18, 19].includes(b))
-    );
-  }
-  return /^[23][0-9a-f]{3}:/i.test(ip);
-}
-async function download(url, headers = {}, hops = 0) {
-  const u = new URL(url);
-  if (
-    u.protocol !== "https:" ||
-    u.username ||
-    u.password ||
-    (u.port && u.port !== "443")
-  )
-    throw Error("Use a public HTTPS feed on port 443");
-  const addresses = await dns.lookup(u.hostname, { all: true });
-  if (!addresses.length || addresses.some((a) => !publicAddress(a.address)))
-    throw Error("Private network feed addresses are not allowed");
-  const address = addresses[0];
-  return new Promise((ok, no) => {
-    const req = https.get(
-      u,
-      {
-        headers: {
-          "User-Agent": "QuietNews/1.0 personal RSS reader",
-          ...headers,
-        },
-        lookup: (_host, opts, cb) =>
-          opts.all
-            ? cb(null, [address])
-            : cb(null, address.address, address.family),
-      },
-      (res) => {
-        if ([301, 302, 303, 307, 308].includes(res.statusCode)) {
-          res.resume();
-          if (hops >= 3) return no(Error("Too many redirects"));
-          download(
-            new URL(res.headers.location, u).href,
-            headers,
-            hops + 1,
-          ).then(ok, no);
-          return;
-        }
-        if (res.statusCode === 304) {
-          res.resume();
-          ok({ status: 304 });
-          return;
-        }
-        if (res.statusCode !== 200) {
-          res.resume();
-          no(Error(`HTTP ${res.statusCode}`));
-          return;
-        }
-        let size = 0;
-        const chunks = [];
-        res.on("data", (c) => {
-          size += c.length;
-          if (size > 2 * 1024 * 1024) {
-            res.destroy(Error("Feed exceeds 2 MB"));
-            return;
-          }
-          chunks.push(c);
-        });
-        res.on("error", no);
-        res.on("end", () =>
-          ok({
-            status: 200,
-            text: Buffer.concat(chunks).toString(),
-            etag: res.headers.etag,
-            modified: res.headers["last-modified"],
-          }),
-        );
-      },
-    );
-    const deadline = setTimeout(
-      () => req.destroy(Error("Page request timed out")),
-      15000,
-    );
-    req.once("close", () => clearTimeout(deadline));
-    req.setTimeout(12000, () => req.destroy(Error("Page request timed out")));
-    req.on("error", no);
-  });
-}
 async function refresh() {
   if (updating) return;
   updating = true;
@@ -333,7 +237,11 @@ async function readArticle(a) {
     };
   extracting = true;
   try {
-    const result = await download(a.url, { Accept: "text/html" });
+    const result = await download(
+      a.url,
+      { Accept: "text/html" },
+      { maxBytes: ARTICLE_MAX_BYTES, label: "Page" },
+    );
     const content = await new Promise((resolve, reject) => {
       const worker = new Worker(new URL("./reader.js", import.meta.url), {
         workerData: { html: result.text, url: a.url },
@@ -373,7 +281,7 @@ async function readArticle(a) {
         ? "The publisher blocked reader-mode access."
         : error.message === "HTTP 401"
           ? "The publisher requires authentication."
-          : error.message === "Feed exceeds 2 MB"
+          : error.code === "ERR_RESPONSE_TOO_LARGE"
             ? "This page is too large for reader mode."
             : error.message;
     const content = { error: message };
