@@ -103,6 +103,8 @@ test("API persists preferences and validates mutation, backup and private feeds"
     );
     assert.ok(housing.results[0].sections.includes("local"));
     assert.ok(housing.results[0].sections.includes("elections"));
+    assert.deepEqual(housing.sections, {});
+    assert.deepEqual(housing.top, []);
     assert.deepEqual(
       initial.sectionNames.slice(7).map(([id]) => id),
       [

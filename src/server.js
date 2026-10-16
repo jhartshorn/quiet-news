@@ -9,6 +9,7 @@ import { mkdirSync, readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { SnapshotCache } from "./snapshot-cache.js";
+import { sendSnapshot } from "./http-response.js";
 import {
   defaultFeeds,
   sections,
@@ -476,30 +477,33 @@ function snapshot(params) {
   const grouped = groupArticles(all);
   const recent = grouped.filter((a) => a.published > Date.now() - 48 * 3600000);
   const pool = archive ? grouped : recent;
-  const top = balanced(
-    pool
-      .filter(
-        (a) =>
-          a.top || a.sections.includes("uk") || a.sections.includes("world"),
-      )
-      .sort(
-        (a, b) => Number(b.top) - Number(a.top) || b.published - a.published,
-      ),
-    6,
-  );
+  const top = archive
+    ? []
+    : balanced(
+        pool
+          .filter(
+            (a) =>
+              a.top ||
+              a.sections.includes("uk") ||
+              a.sections.includes("world"),
+          )
+          .sort(
+            (a, b) =>
+              Number(b.top) - Number(a.top) || b.published - a.published,
+          ),
+        6,
+      );
   const seen = new Set(top.map((a) => a.id));
   const output = {};
   const ordered = [
     ...new Set([...settings.order, ...sections.map(([id]) => id)]),
   ];
-  for (const id of ordered) {
-    if (!archive && settings.hidden.includes(id)) {
+  for (const id of archive ? [] : ordered) {
+    if (settings.hidden.includes(id)) {
       output[id] = [];
       continue;
     }
-    let list = pool.filter(
-      (a) => a.sections.includes(id) && (archive || !seen.has(a.id)),
-    );
+    let list = pool.filter((a) => a.sections.includes(id) && !seen.has(a.id));
     if (id === "local" && settings.region) {
       const preferred = list.filter((a) =>
         (a.title + " " + a.summary)
@@ -508,9 +512,7 @@ function snapshot(params) {
       );
       list = [...preferred, ...list.filter((a) => !preferred.includes(a))];
     }
-    output[id] = archive
-      ? list.slice(0, 100)
-      : balanced(list, id === "us" ? 3 : 6);
+    output[id] = balanced(list, id === "us" ? 3 : 6);
     for (const a of output[id]) seen.add(a.id);
   }
   return {
@@ -596,7 +598,7 @@ const server = http.createServer(async (req, res) => {
     )
       return json(res, 403, { error: "Invalid request origin" });
     if (req.method === "GET" && u.pathname === "/api/news")
-      return json(res, 200, cachedSnapshot(u.searchParams).value);
+      return await sendSnapshot(req, res, cachedSnapshot(u.searchParams));
     if (req.method === "GET" && u.pathname.startsWith("/api/reader/")) {
       const a = db
         .prepare("SELECT * FROM articles WHERE id=?")
