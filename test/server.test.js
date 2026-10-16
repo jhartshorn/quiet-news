@@ -45,7 +45,8 @@ test("API persists preferences and validates mutation, backup and private feeds"
         throw Error("Server exited");
       }),
       new Promise((_, reject) =>
-        setTimeout(() => reject(Error("Startup timeout")), 5000).unref(),
+        // First-run SQLite setup on a Pi/SD card can exceed five seconds.
+        setTimeout(() => reject(Error("Startup timeout")), 15000).unref(),
       ),
     ]);
     const news = await fetch(base + "/api/news").then((r) => r.json());
