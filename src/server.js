@@ -27,9 +27,11 @@ const db = new DatabaseSync(resolve(data, "news.sqlite"));
 db.exec(`PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000;
  CREATE TABLE IF NOT EXISTS articles(id TEXT PRIMARY KEY,url TEXT UNIQUE,title TEXT,summary TEXT,publisher TEXT,published INTEGER,sections TEXT,top INTEGER,kind TEXT);
  CREATE INDEX IF NOT EXISTS articles_date ON articles(published);
+ CREATE INDEX IF NOT EXISTS articles_publisher_date ON articles(publisher,published DESC);
  CREATE TABLE IF NOT EXISTS settings(id INTEGER PRIMARY KEY,json TEXT);
  CREATE TABLE IF NOT EXISTS feeds(id TEXT PRIMARY KEY,json TEXT);
  CREATE TABLE IF NOT EXISTS states(id TEXT PRIMARY KEY,saved INTEGER DEFAULT 0,read INTEGER DEFAULT 0);
+ CREATE INDEX IF NOT EXISTS states_saved ON states(id) WHERE saved=1;
  CREATE TABLE IF NOT EXISTS reader_cache(id TEXT PRIMARY KEY,json TEXT,fetched INTEGER);
  CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY,value TEXT);`);
 // Canonicalise cached URLs on upgrade, preserving bookmarks and section assignments.
@@ -387,12 +389,42 @@ async function readArticle(a) {
     extracting = false;
   }
 }
-function rows() {
+function rows({ source, day, since, view, archive, hideRead }) {
+  const where = [],
+    values = [];
+  if (!archive) {
+    // Include the 18-hour grouping overlap at the edge of the 48-hour homepage.
+    where.push("a.published > ?");
+    values.push(Date.now() - 66 * 3600000);
+  }
+  if (source) {
+    where.push("a.publisher = ?");
+    values.push(source);
+  }
+  if (day) {
+    const start = Date.parse(day + "T00:00:00Z");
+    if (
+      !Number.isFinite(start) ||
+      new Date(start).toISOString().slice(0, 10) !== day
+    )
+      return [];
+    where.push("a.published >= ? AND a.published < ?");
+    values.push(start, start + 86400000);
+  }
+  if (since) {
+    where.push("a.published > ?");
+    values.push(since);
+  }
+  if (view === "saved") where.push("s.saved = 1");
+  if (hideRead) where.push("COALESCE(s.read,0) = 0");
   return db
     .prepare(
-      "SELECT a.*,COALESCE(s.saved,0) saved,COALESCE(s.read,0) read FROM articles a LEFT JOIN states s ON a.id=s.id ORDER BY published DESC LIMIT 3000",
+      `SELECT a.*,COALESCE(s.saved,0) saved,COALESCE(s.read,0) read
+       FROM articles a LEFT JOIN states s ON a.id=s.id
+       ${where.length ? "WHERE " + where.join(" AND ") : ""}
+       ORDER BY a.published DESC`,
     )
-    .all()
+    .all(...values)
     .map((a) => ({
       ...a,
       summary: clean(a.summary),
@@ -411,6 +443,7 @@ function snapshot(params) {
   const day = params.get("date");
   const since = Number(params.get("since")) || 0;
   const topic = params.get("topic") || "";
+  const archive = !!(q || view || source || day || since || topic);
   const muted = settings.muted
     .toLowerCase()
     .split(",")
@@ -421,25 +454,26 @@ function snapshot(params) {
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-  const all = rows().filter((a) => {
+  const all = rows({
+    source,
+    day,
+    since,
+    view,
+    archive,
+    hideRead: settings.hideRead,
+  }).filter((a) => {
     const t = `${a.title} ${a.summary}`.toLowerCase();
     return (
       !excludedArticle(a) &&
       !(/\b(obituary|bork)\b/i.test(a.title) && view !== "saved") &&
       (!q || t.includes(q)) &&
-      (!source || a.publisher === source) &&
-      (!day || new Date(a.published).toISOString().slice(0, 10) === day) &&
-      (!since || a.published > since) &&
       (!topic || t.includes(topic.toLowerCase())) &&
-      (!settings.hideRead || !a.read) &&
       !settings.disabledPublishers.includes(a.publisher) &&
       !muted.some((w) => t.includes(w)) &&
-      (view !== "saved" || a.saved) &&
       (view !== "followed" || followed.some((w) => t.includes(w)))
     );
   });
   const grouped = groupArticles(all);
-  const archive = !!(q || view || source || day || since || topic);
   const recent = grouped.filter((a) => a.published > Date.now() - 48 * 3600000);
   const pool = archive ? grouped : recent;
   const top = balanced(

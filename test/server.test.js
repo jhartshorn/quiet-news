@@ -176,6 +176,70 @@ test("API persists preferences and validates mutation, backup and private feeds"
     assert.equal(excluded.blocks, undefined);
     const persisted = await fetch(base + "/api/news").then((r) => r.json());
     assert.deepEqual(persisted.settings.directSources, ["Test Publisher"]);
+    const history = new DatabaseSync(join(dir, "news.sqlite"));
+    const insert = history.prepare(
+      "INSERT INTO articles VALUES (?,?,?,?,?,?,?,?,?)",
+    );
+    history.exec("BEGIN");
+    for (let i = 0; i < 3001; i++)
+      insert.run(
+        `history-${i}`,
+        `https://example.com/history-${i}`,
+        `Archived bulletin ${i}`,
+        "Older reporting",
+        "History Source",
+        Date.now() - 7 * 86400000 - i,
+        '["world"]',
+        0,
+        "News",
+      );
+    insert.run(
+      "old-saved",
+      "https://example.com/old-saved",
+      "Zürich archive discovery",
+      "An older saved story",
+      "Rare Source",
+      Date.UTC(2010, 0, 1, 12),
+      '["world"]',
+      0,
+      "News",
+    );
+    history.prepare("INSERT INTO states VALUES (?,?,?)").run("old-saved", 1, 0);
+    history.exec("COMMIT");
+    history.close();
+    for (const query of [
+      "view=saved",
+      "source=Rare+Source",
+      "date=2010-01-01",
+      "q=ZÜRICH",
+      "since=1&source=Rare+Source",
+    ]) {
+      const response = await fetch(base + "/api/news?" + query).then((r) =>
+        r.json(),
+      );
+      assert.ok(
+        response.results.some((a) => a.id === "old-saved"),
+        query,
+      );
+    }
+    const invalidDate = await fetch(base + "/api/news?date=2010-02-31").then(
+      (r) => r.json(),
+    );
+    assert.equal(invalidDate.results.length, 0);
+    await fetch(base + "/api/state/old-saved", {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ read: true }),
+    });
+    await fetch(base + "/api/settings", {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ hideRead: true }),
+    });
+    const unreadSaved = await fetch(base + "/api/news?view=saved").then((r) =>
+      r.json(),
+    );
+    assert.ok(!unreadSaved.results.some((a) => a.id === "old-saved"));
     const privateFeed = await fetch(base + "/api/feeds", {
       method: "POST",
       headers,
