@@ -1,5 +1,6 @@
 import { gzip, constants } from "node:zlib";
 import { promisify } from "node:util";
+import { createHash } from "node:crypto";
 const compress = promisify(gzip);
 
 export function acceptsGzip(header = "") {
@@ -15,11 +16,26 @@ export function acceptsGzip(header = "") {
 }
 
 export async function sendSnapshot(req, res, entry) {
+  entry.etag ||= `W/"${createHash("sha256").update(entry.json).digest("base64url")}"`;
   const headers = {
     "Content-Type": "application/json",
-    "Cache-Control": "no-store",
+    "Cache-Control": "private, no-cache",
     Vary: "Accept-Encoding",
+    ETag: entry.etag,
   };
+  if (
+    req.headers["if-none-match"]
+      ?.split(",")
+      .some(
+        (tag) =>
+          tag.trim() === "*" ||
+          tag.trim().replace(/^W\//, "") === entry.etag.replace(/^W\//, ""),
+      )
+  ) {
+    res.writeHead(304, headers);
+    res.end();
+    return;
+  }
   let body = entry.json;
   if (
     Buffer.byteLength(body) >= 1024 &&

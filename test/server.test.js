@@ -56,6 +56,14 @@ test("API persists preferences and validates mutation, backup and private feeds"
     assert.notEqual(news.top[0].id, "legacy");
     assert.deepEqual(news.sections.uk, []);
     assert.ok(news.feeds.length > 10);
+    const fresh = await fetch(base + "/api/news");
+    const etag = fresh.headers.get("etag");
+    assert.ok(etag);
+    const unchanged = await fetch(base + "/api/news", {
+      headers: { "If-None-Match": etag },
+    });
+    assert.equal(unchanged.status, 304);
+    assert.equal(await unchanged.text(), "");
     const seed = new DatabaseSync(join(dir, "news.sqlite"));
     seed
       .prepare("INSERT INTO articles VALUES (?,?,?,?,?,?,?,?,?)")
@@ -80,6 +88,11 @@ test("API persists preferences and validates mutation, backup and private feeds"
       Date.now(),
     );
     seed.close();
+    const changed = await fetch(base + "/api/news", {
+      headers: { "If-None-Match": etag },
+    });
+    assert.equal(changed.status, 200);
+    assert.notEqual(changed.headers.get("etag"), etag);
     const reader = await fetch(base + "/api/reader/fixture").then((r) =>
       r.json(),
     );

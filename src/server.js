@@ -726,6 +726,8 @@ const server = http.createServer(async (req, res) => {
       "/reader": "reader.html",
       "/reader.js": "reader.js",
       "/app.js": "app.js",
+      "/news-client.js": "news-client.js",
+      "/news-view.js": "news-view.js",
       "/style.css": "style.css",
       "/favicon.svg": "favicon.svg",
     };

@@ -1,3 +1,6 @@
+import { NewsClient } from "./news-client.js";
+import { reconcileSections } from "./news-view.js";
+const newsClient = new NewsClient();
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
   String(s ?? "").replace(
@@ -9,8 +12,10 @@ const esc = (s) =>
   );
 let data,
   order = [],
+  hiddenSections = [],
   lastVisit = Number(localStorage.getItem("lastVisit")) || Date.now(),
-  busy = false;
+  busy = false,
+  loadPending = false;
 localStorage.setItem("lastVisit", String(Date.now()));
 const relative = (t) => {
   if (!t) return "Never";
@@ -40,7 +45,10 @@ function notice(message) {
   $("#notice").textContent = message;
 }
 async function load() {
-  if (busy) return;
+  if (busy) {
+    loadPending = true;
+    return;
+  }
   busy = true;
   try {
     const p = new URLSearchParams();
@@ -53,14 +61,20 @@ async function load() {
     const v = $("#view").value;
     if (v === "since") p.set("since", lastVisit);
     else if (v) p.set("view", v);
-    data = await api("/api/news?" + p);
-    render();
+    const result = await newsClient.load("/api/news?" + p);
+    data = result.data;
+    if (result.changed) render();
+    renderStatus();
   } catch (e) {
     notice(
       "Could not load news: " + e.message + ". Your server may be restarting.",
     );
   } finally {
     busy = false;
+    if (loadPending) {
+      loadPending = false;
+      void load();
+    }
   }
 }
 function dashboardURL(sectionId) {
@@ -83,7 +97,7 @@ function card(a, sectionId) {
   const destination = reader
     ? `/reader?id=${a.id}&return=${encodeURIComponent(dashboardURL(sectionId))}`
     : a.url;
-  return `<article class="card ${a.read ? "read" : ""}"><div class="meta"><span class="source">${esc(a.publisher)}</span><span>${a.kind === "Analysis" ? "Analysis · " : ""}<time datetime="${new Date(a.published).toISOString()}" title="${esc(new Date(a.published).toLocaleString())}">${relative(a.published)}</time></span></div><h3><a class="article-link" data-open="${a.id}" href="${esc(destination)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a></h3>${a.summary ? `<p class="summary">${esc(a.summary)}</p>` : ""}<div class="card-bottom"><a class="open" data-open="${a.id}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">Read at source ↗</a><div><button data-state="saved" data-id="${a.id}" data-value="${!a.saved}" aria-pressed="${a.saved}">${a.saved ? "Saved ✓" : "Save"}</button> <button data-state="read" data-id="${a.id}" data-value="${!a.read}" aria-pressed="${a.read}">${a.read ? "Unread" : "Mark read"}</button></div></div>${a.coverage.length ? `<details><summary>Other coverage · ${a.coverage.length}</summary>${a.coverage.map((c) => `<a target="_blank" rel="noopener noreferrer" href="${esc(c.url)}">${esc(c.publisher)} — ${esc(c.title)} ↗</a>`).join("")}</details>` : ""}</article>`;
+  return `<article data-article-id="${a.id}" class="card ${a.read ? "read" : ""}"><div class="meta"><span class="source">${esc(a.publisher)}</span><span>${a.kind === "Analysis" ? "Analysis · " : ""}<time datetime="${new Date(a.published).toISOString()}" title="${esc(new Date(a.published).toLocaleString())}">${relative(a.published)}</time></span></div><h3><a class="article-link" data-open="${a.id}" href="${esc(destination)}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a></h3>${a.summary ? `<p class="summary">${esc(a.summary)}</p>` : ""}<div class="card-bottom"><a class="open" data-open="${a.id}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">Read at source ↗</a><div><button data-state="saved" data-id="${a.id}" data-value="${!a.saved}" aria-pressed="${a.saved}">${a.saved ? "Saved ✓" : "Save"}</button> <button data-state="read" data-id="${a.id}" data-value="${!a.read}" aria-pressed="${a.read}">${a.read ? "Unread" : "Mark read"}</button></div></div>${a.coverage.length ? `<details><summary>Other coverage · ${a.coverage.length}</summary>${a.coverage.map((c) => `<a target="_blank" rel="noopener noreferrer" href="${esc(c.url)}">${esc(c.publisher)} — ${esc(c.title)} ↗</a>`).join("")}</details>` : ""}</article>`;
 }
 function section(id, title, articles, top = false) {
   return `<section id="${id}"><div class="section-head"><h2>${esc(title)}</h2><span>${top ? "THE BIG PICTURE" : id === "us" ? "MAJOR DEVELOPMENTS ONLY" : "LATEST REPORTING"}</span></div>${id === "security" ? '<div class="topic-tabs"><button data-topic="iran">Iran & Middle East</button><button data-topic="ukraine">Ukraine & Russia</button><button data-topic="taiwan">China & Taiwan</button></div>' : ""}${articles.length ? `<div class="grid ${top ? "top-grid" : ""}">${articles.map((a) => card(a, id)).join("")}</div>` : `<div class="empty">No recent matching stories${id === "local" ? ". Add a regional or council feed in Sources for more local coverage" : ". Check back after the next update, or explore All history"}.</div>`}</section>`;
@@ -92,6 +106,54 @@ function render() {
   const s = data.settings;
   document.body.dataset.theme = s.theme;
   document.body.classList.toggle("compact", s.compact);
+  const names = Object.fromEntries(data.sectionNames);
+  const ordered = [
+    ...new Set([...s.order, ...data.sectionNames.map((x) => x[0])]),
+  ];
+  const navHTML =
+    '<a href="#top">Top stories</a>' +
+    ordered
+      .filter((id) => !s.hidden.includes(id))
+      .map((id) => `<a href="#${id}">${esc(names[id])}</a>`)
+      .join("");
+  if ($("#nav")._newsHTML !== navHTML) {
+    $("#nav").innerHTML = navHTML;
+    $("#nav")._newsHTML = navHTML;
+  }
+  const filtering =
+    $("#view").value ||
+    $("#search").value ||
+    $("#publisher").value ||
+    $("#filter-date").value;
+  const entries = filtering
+    ? [
+        [
+          "results",
+          `${data.count} matching stories${data.count > 100 ? " · showing newest 100" : ""}`,
+          data.results,
+        ],
+      ]
+    : [
+        ["top", "Top stories", data.top, true],
+        ...ordered
+          .filter((id) => !s.hidden.includes(id))
+          .map((id) => [id, names[id], data.sections[id]]),
+      ];
+  reconcileSections($("#news"), entries, section, (id) => [
+    s.readerMode,
+    s.directSources,
+    dashboardURL(id),
+  ]);
+  const current = $("#publisher").value;
+  $("#publisher").innerHTML =
+    '<option value="">All sources</option>' +
+    data.publishers
+      .map(
+        (p) => `<option ${p === current ? "selected" : ""}>${esc(p)}</option>`,
+      )
+      .join("");
+}
+function renderStatus() {
   $("#date").textContent = new Date()
     .toLocaleDateString("en-GB", {
       weekday: "long",
@@ -107,40 +169,8 @@ function render() {
   $("#refresh").disabled = data.updating;
   $("#footer-info").textContent =
     `Refreshes every ${data.minutes} minutes · ${data.retention}-day history · Saved stories retained.`;
-  const names = Object.fromEntries(data.sectionNames);
-  const ordered = [
-    ...new Set([...s.order, ...data.sectionNames.map((x) => x[0])]),
-  ];
-  $("#nav").innerHTML =
-    '<a href="#top">Top stories</a>' +
-    ordered
-      .filter((id) => !s.hidden.includes(id))
-      .map((id) => `<a href="#${id}">${esc(names[id])}</a>`)
-      .join("");
-  const filtering =
-    $("#view").value ||
-    $("#search").value ||
-    $("#publisher").value ||
-    $("#filter-date").value;
-  $("#news").innerHTML = filtering
-    ? section(
-        "results",
-        `${data.count} matching stories${data.count > 100 ? " · showing newest 100" : ""}`,
-        data.results,
-      )
-    : section("top", "Top stories", data.top, true) +
-      ordered
-        .filter((id) => !s.hidden.includes(id))
-        .map((id) => section(id, names[id], data.sections[id]))
-        .join("");
-  const current = $("#publisher").value;
-  $("#publisher").innerHTML =
-    '<option value="">All sources</option>' +
-    data.publishers
-      .map(
-        (p) => `<option ${p === current ? "selected" : ""}>${esc(p)}</option>`,
-      )
-      .join("");
+  for (const time of $("#news").querySelectorAll("time"))
+    time.textContent = relative(Date.parse(time.dateTime));
   const failed = data.feeds.filter((f) => f.enabled && f.error);
   notice(
     failed.length
@@ -242,7 +272,7 @@ function showSectionSettings() {
   $("#section-settings").innerHTML = order
     .map(
       (id, i) =>
-        `<div class="setting-row"><label class="check"><input type="checkbox" data-section="${id}" ${!data.settings.hidden.includes(id) ? "checked" : ""}>${esc(names[id])}</label><div><button type="button" data-move="${id}" data-direction="-1" ${i === 0 ? "disabled" : ""} aria-label="Move ${esc(names[id])} up">↑</button> <button type="button" data-move="${id}" data-direction="1" ${i === order.length - 1 ? "disabled" : ""} aria-label="Move ${esc(names[id])} down">↓</button></div></div>`,
+        `<div class="setting-row"><label class="check"><input type="checkbox" data-section="${id}" ${!hiddenSections.includes(id) ? "checked" : ""}>${esc(names[id])}</label><div><button type="button" data-move="${id}" data-direction="-1" ${i === 0 ? "disabled" : ""} aria-label="Move ${esc(names[id])} up">↑</button> <button type="button" data-move="${id}" data-direction="1" ${i === order.length - 1 ? "disabled" : ""} aria-label="Move ${esc(names[id])} down">↓</button></div></div>`,
     )
     .join("");
 }
@@ -256,6 +286,7 @@ $("#settings-open").onclick = () => {
   for (const k of ["compact", "hideRead", "readerMode"])
     f.elements[k].checked = s[k];
   order = [...new Set([...s.order, ...data.sectionNames.map((x) => x[0])])];
+  hiddenSections = [...s.hidden];
   showSectionSettings();
   $("#publisher-settings").innerHTML = data.publishers
     .map(
@@ -268,7 +299,7 @@ $("#settings-open").onclick = () => {
 $("#section-settings").onclick = (e) => {
   const b = e.target.closest("[data-move]");
   if (!b) return;
-  data.settings.hidden = [
+  hiddenSections = [
     ...document.querySelectorAll("[data-section]:not(:checked)"),
   ].map((x) => x.dataset.section);
   const i = order.indexOf(b.dataset.move),
