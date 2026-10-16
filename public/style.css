@@ -123,13 +123,14 @@ header {
 nav {
   border-block: 1px solid var(--line);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 28px;
   overflow: auto;
   padding: 14px 24px;
   background: var(--paper);
 }
 nav a {
+  flex-shrink: 0;
   white-space: nowrap;
   text-decoration: none;
   font-size: 13px;

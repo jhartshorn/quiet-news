@@ -679,6 +679,7 @@ const server = http.createServer(async (req, res) => {
       "/reader.js": "reader.js",
       "/app.js": "app.js",
       "/style.css": "style.css",
+      "/favicon.svg": "favicon.svg",
     };
     if (req.method === "GET" && files[u.pathname]) {
       res.writeHead(200, {
@@ -686,7 +687,9 @@ const server = http.createServer(async (req, res) => {
           ? "text/javascript"
           : u.pathname.endsWith(".css")
             ? "text/css"
-            : "text/html",
+            : u.pathname.endsWith(".svg")
+              ? "image/svg+xml"
+              : "text/html",
         "Cache-Control": "no-cache",
       });
       res.end(readFileSync(resolve(root, files[u.pathname])));
