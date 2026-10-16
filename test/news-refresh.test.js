@@ -4,6 +4,21 @@ import { parseHTML } from "linkedom";
 import { NewsClient } from "../public/news-client.js";
 import { reconcileSections } from "../public/news-view.js";
 
+test("Default fetch keeps its browser receiver for initial and conditional requests", async (t) => {
+  const replies = [
+    new Response('{"count":1}', { headers: { ETag: 'W/"one"' } }),
+    new Response(null, { status: 304 }),
+  ];
+  const fetch = t.mock.method(globalThis, "fetch", function () {
+    assert.equal(this, globalThis, "Window.fetch requires its Window receiver");
+    return Promise.resolve(replies.shift());
+  });
+  const client = new NewsClient();
+  assert.equal((await client.load("/api/news?")).data.count, 1);
+  assert.equal((await client.load("/api/news?")).changed, false);
+  assert.equal(fetch.mock.callCount(), 2);
+});
+
 test("Conditional polling reuses unchanged news and keeps query changes isolated", async () => {
   const calls = [];
   const replies = [

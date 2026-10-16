@@ -1,5 +1,5 @@
 export class NewsClient {
-  constructor(fetcher = globalThis.fetch) {
+  constructor(fetcher = globalThis.fetch.bind(globalThis)) {
     this.fetcher = fetcher;
   }
   async load(url) {
