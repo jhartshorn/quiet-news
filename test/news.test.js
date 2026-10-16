@@ -61,6 +61,25 @@ test("Source limits prevent one publisher occupying every slot", () => {
   assert.equal(result.filter((a) => a.publisher === "A").length, 2);
 });
 
+test("Grouping respects the 18-hour boundary and accepts unsorted articles", () => {
+  const title = "Council approves major housing development in Bristol";
+  const article = (published, url) => ({
+    title,
+    published,
+    url,
+    sections: ["local"],
+    publisher: "Example",
+  });
+  const groups = groupArticles([
+    article(0, "https://example.com/old"),
+    article(18 * 3600000, "https://example.com/new"),
+    article(17 * 3600000, "https://example.com/related"),
+  ]);
+  assert.equal(groups.length, 2);
+  assert.equal(groups[0].coverage[0].url, "https://example.com/related");
+  assert.equal(groups[1].coverage.length, 0);
+});
+
 test("Escaped HTML excerpts are stripped after entity decoding", () => {
   assert.equal(
     clean("&lt;p&gt;Hello &amp; goodbye&lt;/p&gt;"),

@@ -8,6 +8,7 @@ import { DatabaseSync } from "node:sqlite";
 import { mkdirSync, readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { SnapshotCache } from "./snapshot-cache.js";
 import {
   defaultFeeds,
   sections,
@@ -496,6 +497,17 @@ function snapshot(params) {
     sectionNames: sections,
   };
 }
+const snapshotCache = new SnapshotCache();
+const localChanges = db.prepare("SELECT total_changes() AS revision");
+const externalChanges = db.prepare("PRAGMA data_version");
+function cachedSnapshot(params) {
+  const key = new URLSearchParams();
+  for (const name of ["q", "view", "source", "date", "since", "topic"])
+    if (params.get(name)) key.set(name, params.get(name));
+  // Also observe writes from another SQLite connection (restores/tools/tests).
+  const revision = `${localChanges.get().revision}:${externalChanges.get().data_version}:${updating}`;
+  return snapshotCache.get(key.toString(), revision, () => snapshot(key));
+}
 function json(res, status, value) {
   res.writeHead(status, {
     "Content-Type": "application/json",
@@ -550,7 +562,7 @@ const server = http.createServer(async (req, res) => {
     )
       return json(res, 403, { error: "Invalid request origin" });
     if (req.method === "GET" && u.pathname === "/api/news")
-      return json(res, 200, snapshot(u.searchParams));
+      return json(res, 200, cachedSnapshot(u.searchParams).value);
     if (req.method === "GET" && u.pathname.startsWith("/api/reader/")) {
       const a = db
         .prepare("SELECT * FROM articles WHERE id=?")

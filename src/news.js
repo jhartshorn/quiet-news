@@ -511,7 +511,8 @@ export function groupArticles(rows) {
       candidates = new Map();
     for (const word of words)
       for (const i of index.get(word) || [])
-        candidates.set(i, (candidates.get(i) || 0) + 1);
+        if (Math.abs(groups[i].published - a.published) < 18 * 3600000)
+          candidates.set(i, (candidates.get(i) || 0) + 1);
     const match = [...candidates].find(
       ([i, n]) =>
         n >= 4 &&
