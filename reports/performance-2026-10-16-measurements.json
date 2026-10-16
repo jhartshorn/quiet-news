@@ -1,0 +1,114 @@
+{
+  "benchmarkDate": "2026-10-16",
+  "datasetArticles": 3828,
+  "uncached": {
+    "requestsPerImage": 10,
+    "beforeMedianMs": 923.81,
+    "afterMedianMs": 258.049
+  },
+  "before": {
+    "container": "quiet-news-performance-before",
+    "datasetCount": 2918,
+    "firstDashboardMs": 1142.387,
+    "idleRssMiB": 116.42,
+    "idleCpuSecondsOver10s": 0.04,
+    "peakRssMiB": 233.99,
+    "results": {
+      "dashboard": {
+        "requests": 40,
+        "medianMs": 834.335,
+        "p95Ms": 1082.351,
+        "bytesPerResponse": 85352,
+        "nodeCpuSeconds": 26.81,
+        "rssMiB": 220.52
+      },
+      "history": {
+        "requests": 20,
+        "medianMs": 882.843,
+        "p95Ms": 1677.728,
+        "bytesPerResponse": 931433,
+        "nodeCpuSeconds": 13.91,
+        "rssMiB": 232.19
+      },
+      "search": {
+        "requests": 20,
+        "medianMs": 517.043,
+        "p95Ms": 603.913,
+        "bytesPerResponse": 113988,
+        "nodeCpuSeconds": 7.92,
+        "rssMiB": 229.82
+      },
+      "saved": {
+        "requests": 10,
+        "medianMs": 513.237,
+        "p95Ms": 578.875,
+        "bytesPerResponse": 14105,
+        "nodeCpuSeconds": 3.89,
+        "rssMiB": 229.82
+      },
+      "unchangedPoll": {
+        "requests": 40,
+        "medianMs": 871.476,
+        "bytesPerResponse": 85352,
+        "status": 200,
+        "nodeCpuSeconds": 25.74
+      }
+    }
+  },
+  "after": {
+    "container": "quiet-news-performance-after",
+    "datasetCount": 1182,
+    "firstDashboardMs": 608.875,
+    "idleRssMiB": 88.27,
+    "idleCpuSecondsOver10s": 0.02,
+    "peakRssMiB": 131.12,
+    "results": {
+      "dashboard": {
+        "requests": 40,
+        "medianMs": 3.344,
+        "p95Ms": 4.601,
+        "bytesPerResponse": 29521,
+        "nodeCpuSeconds": 0.08,
+        "rssMiB": 88.39
+      },
+      "history": {
+        "requests": 20,
+        "medianMs": 3.569,
+        "p95Ms": 89.606,
+        "bytesPerResponse": 24247,
+        "nodeCpuSeconds": 0.1,
+        "rssMiB": 111.62
+      },
+      "search": {
+        "requests": 20,
+        "medianMs": 2.763,
+        "p95Ms": 3.182,
+        "bytesPerResponse": 15752,
+        "nodeCpuSeconds": 0.04,
+        "rssMiB": 130.12
+      },
+      "saved": {
+        "requests": 10,
+        "medianMs": 2.246,
+        "p95Ms": 2.893,
+        "bytesPerResponse": 3587,
+        "nodeCpuSeconds": 0.02,
+        "rssMiB": 130.5
+      },
+      "unchangedPoll": {
+        "requests": 40,
+        "medianMs": 1.765,
+        "bytesPerResponse": 0,
+        "status": 304,
+        "nodeCpuSeconds": 0.07
+      }
+    }
+  },
+  "validation": {
+    "identicalHomepageCards": 120,
+    "historyBefore": 2918,
+    "historyAfter": 3730,
+    "councilSearchBefore": 53,
+    "councilSearchAfter": 62
+  }
+}
